@@ -2,3 +2,5 @@
 *.tar.*
 *.zip
 test
+oldFiles
+*.yaml

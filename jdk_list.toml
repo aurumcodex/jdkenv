@@ -2,34 +2,36 @@
 # perhaps this'll look more readable and be "easier" to work with
 # will look into making this file the one that the application works with, but i doubt it, tbh
 
-# [=====]] Oracle OpenJDK sources =======================================================]
-[[openjdk]]
+# [======= Oracle OpenJDK sources =======================================================]
+[oracle]
 base_url = "https://download.java.net/openjdk/"
 
-[openjdk.8]
+[oracle.8]
 ext_url = "jdk8u41/ri/"
 filename = "openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz"
 
-[openjdk.11]
+[oracle.11]
 ext_url = "jdk11/ri/"
 filename = "openjdk-11+28_linux-x64_bin.tar.gz"
 
-[openjdk.15]
+[oracle.15]
 ext_url = "jdk15/ri/"
 filename = "openjdk-15+36_linux-x64_bin.tar.gz"
 
 # [======= Amazon Corretto JDK sources ==================================================]
-[[corretto]]
+[corretto]
 base_url = "https://corretto.aws/downloads/latest/"
 
 [corretto.8]
 filename = "amazon-corretto-8-x64-linux-jdk.tar.gz"
+file = "amazon-corretto-8.265.01.1-linux.x64.tar.gz"
 
 [corretto.11]
 filename = "amazon-corretto-11-x64-linux-jdk.tar.gz"
+file = "amazon-corretto-11.0.8.10.1-linux.x64.tar.gz"
 
 # [======= BellSoft Liberica JDK sources (uses the "full" jdk) ==========================]
-[[liberica]]
+[liberica]
 base_url = "https://download.bell-sw.com/java/"
 
 [liberica.8]
@@ -46,38 +48,38 @@ filename = "bellsoft-jdk15+36-linux-amd64-full.tar.gz"
 
 # [======= AdoptOpenJDK sources =========================================================]
 # syntax = [base_url][ext_url][release_path][tag][filename]
-[[adoptopenjdk]]
+[openjdk]
 base_url = "https://github.com/AdoptOpenJDK/"
 release_path = "releases/download/"
 
-[adoptopenjdk.8]
+[openjdk.8]
 ext_url = "openjdk8-binaries/"
 tag = "jdk8u265-b01/"
 filename = "OpenJDK8U-jdk_x64_linux_hotspot_8u265b01.tar.gz"
 
-[adoptopenjdk.8.openj9]
+[openjdk.8.openj9]
 tag = "jdk8u265-b01_openj9-0.21.0/"
 filename = "OpenJDK8U-jre_x64_linux_openj9_8u265b01_openj9-0.21.0.tar.gz"
 
-[adoptopenjdk.11]
+[openjdk.11]
 ext_url = "openjdk11-binaries/"
 tag = "jdk-11.0.8%2B10/"
 filename = "OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz"
 
-[adoptopenjdk.11.openj9]
+[openjdk.11.openj9]
 tag = "jdk-11.0.8%2B10_openj9-0.21.0/"
 filename = "OpenJDK11U-jdk_x64_linux_openj9_11.0.8_10_openj9-0.21.0.tar.gz"
 
-[adoptopenjdk.14]
+[openjdk.14]
 ext_url = "openjdk14-binaries/"
 tag = "jdk-14.0.2%2B12/"
 filename = "OpenJDK14U-jdk_x64_linux_hotspot_14.0.2_12.tar.gz"
 
-[adoptopenjdk.14.openj9]
+[openjdk.14.openj9]
 tag = "jdk-14.0.2%2B12_openj9-0.21.0/"
 filename = "OpenJDK14U-jdk_x64_linux_openj9_14.0.2_12_openj9-0.21.0.tar.gz"
 
-[adoptopenjdk.15]
+[openjdk.15]
 ext_url = "openjdk15-binaries/"
 tag = "jdk-15%2B36/"
 filename = "OpenJDK15U-jdk_x64_linux_hotspot_15_36.tar.gz"

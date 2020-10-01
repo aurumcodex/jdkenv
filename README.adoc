@@ -1,0 +1,67 @@
+= jdkenv
+
+A simple Go program to manage and install (if not found) various JDKs.
+
+Useful for when you use multiple JDK implementations, or want to build on different versions to test your
+Java projects or other JVM language projects on different standard libraries.
+
+Creates a directory `.jdkenv` in the `$HOME` directory, and will contain the downloaded JDK .tar.gz archives
+fully extracted. Once a JDK has been selected, an `env` file will be created within the `.jdkenv` directory
+that can then be sourced via a shell recfile. (`.bashrc`, `.zshrc`, `.profile`, etc.)
+
+// A GUI will be available soon.
+
+== Dependencies
+- Go 1.15 (min version needs to be checked from deps)
+// - GTK3 Library and Development files (>= 3.12)
+
+== Installation
+=== Using Go Modules
+best way to be determined
+// Run `go get github.com/aurumcodex/jdkenv`
+
+== Usage
+----
+Usage:
+  jdkenv [command]
+
+Available Commands:
+  corretto    A brief description of your command
+  help        Help about any command
+  liberica    A brief description of your command
+  local       A brief description of your command
+  menu        A brief description of your command
+  openjdk     A brief description of your command
+  oracle      A brief description of your command
+  system      A brief description of your command
+
+Flags:
+  -h, --help      help for jdkenv
+  -t, --toggle    Help message for toggle
+  -v, --version   version for jdkenv
+----
+
+== Supported JDKs
+- Oracle OpenJDK
+** JDK 8
+** JDK 11
+** JDK 15
+
+- Amazon Corretto
+** JDK 8
+** JDK 11
+
+- BellSoft Liberica
+** JDK 8
+** JDK 11
+** JDK 15
+
+- AdoptOpenJDK
+** JDK 8  (Hotspot VM / OpenJ9 VM)
+** JDK 11 (Hotspot VM / OpenJ9 VM)
+** JDK 14 (Hotspot VM / OpenJ9 VM)
+** JDK 15 (Hotspot VM Only)
+
+== License
+JDKEnv is licensed under the Apache 2.0 License.
+See link:LICENSE[LICENSE] for more details.
