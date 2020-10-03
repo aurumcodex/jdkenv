@@ -81,7 +81,7 @@ func init() {
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.jdkenv.yaml)")
 
-	rootCmd.PersistentFlags().BoolVar(&color, "no-color", false, "set colorized or monochrome output")
+	rootCmd.PersistentFlags().BoolVar(&color, "no-color", false, "use monochrome output")
 	au = aurora.NewAurora(!color)
 
 	rootCmd.PersistentFlags().IntVarP(&jdkVer, "jdk", "j", 8, "use specific Java version (valid ints: 8, 11, 14, 15)")

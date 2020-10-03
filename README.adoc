@@ -25,22 +25,22 @@ best way to be determined
 == Usage
 ----
 Usage:
+  jdkenv [flags]
   jdkenv [command]
 
 Available Commands:
-  corretto    A brief description of your command
+  corretto    Set usage of Amazon Corretto JDK
   help        Help about any command
-  liberica    A brief description of your command
-  local       A brief description of your command
-  menu        A brief description of your command
-  openjdk     A brief description of your command
-  oracle      A brief description of your command
-  system      A brief description of your command
+  liberica    Set usage of BellSoft Liberica JDK
+  local       Set usage of a locally installed JDK
+  openjdk     Set usage of AdoptOpenJDK
+  oracle      Set usage of Oracle OpenJDK Reference Implementation
+  system      Set usage of system installed JDK
 
 Flags:
-  -h, --help      help for jdkenv
-  -t, --toggle    Help message for toggle
-  -v, --version   version for jdkenv
+  -h, --help       help for jdkenv
+  -j, --jdk int    use specific Java version (valid ints: 8, 11, 14, 15) (default 8)
+      --no-color   use monochrome output
 ----
 
 == Supported JDKs
