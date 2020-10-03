@@ -11,6 +11,8 @@ that can then be sourced via a shell recfile. (`.bashrc`, `.zshrc`, `.profile`, 
 
 // A GUI will be available soon.
 
+NOTE: Windows is currently unsupported at this time.
+
 == Dependencies
 - Go 1.15 (min version needs to be checked from deps)
 // - GTK3 Library and Development files (>= 3.12)

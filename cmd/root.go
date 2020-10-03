@@ -21,12 +21,16 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/aurumcodex/jdkenv/util"
+
 	"github.com/logrusorgru/aurora"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
-
-	"github.com/aurumcodex/jdkenv/util"
 )
+
+var jdkVer int
+var color bool
+var au aurora.Aurora
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -35,21 +39,29 @@ var rootCmd = &cobra.Command{
 	Short:   "A simple Go program to manage and install (if not found) various JDKs.",
 	Long: `jdkenv :: version 0.1.0
 A simple Go program to manage and install (if not found) various JDKs.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		type Config struct {
-			oracle   util.Oracle
-			corretto util.Corretto
+		util.CheckRuntime()
+
+		switch jdkVer {
+		case 8, 11, 14, 15: // will add in support for other Java versions in a later update
+			break
+		default:
+			fmt.Fprintln(os.Stderr, "Error: Unknown JDK type")
+			os.Exit(1)
 		}
 
-		tomlCfg, _ := toml.LoadFile("./jdk_list.toml")
+		jdks, err := toml.LoadFile("jdk_list.toml")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Unable to read JDK list file; error = %v", err)
+			os.Exit(1)
+		}
 
-		var conf Config
-		tomlCfg.Unmarshal(&conf)
+		directOpenJDKBaseURL := jdks.Get("openjdk.base_url").(string)
+		// var conf Config
+		// tomlCfg.Unmarshal(&conf)
 
 		// fmt.Println(conf)
-		fmt.Println("oracle base_url:", conf.oracle.Base)
+		fmt.Println("oracle base_url:", directOpenJDKBaseURL)
 	},
 }
 
@@ -62,9 +74,6 @@ func Execute() {
 	}
 }
 
-var color bool
-var au aurora.Aurora
-
 func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
@@ -74,6 +83,10 @@ func init() {
 
 	rootCmd.PersistentFlags().BoolVar(&color, "no-color", false, "set colorized or monochrome output")
 	au = aurora.NewAurora(!color)
+
+	rootCmd.PersistentFlags().IntVarP(&jdkVer, "jdk", "j", 8, "use specific Java version (valid ints: 8, 11, 14, 15)")
+
+	// rootCmd.PersistentFlags().BoolVar(&use8, "8", false, "set JDK version to Java 8")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.

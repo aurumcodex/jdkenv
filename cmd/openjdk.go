@@ -20,23 +20,36 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/aurumcodex/jdkenv/util"
+
 	"github.com/spf13/cobra"
 )
 
 // openjdkCmd represents the openjdk command
 var openjdkCmd = &cobra.Command{
 	Use:   "openjdk",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Set usage of AdoptOpenJDK",
+	Long: `Downloads and extracts (if not already existing) the tarball containing
+the AdoptOpenJDK implementation with the set JDK version parameter. 
+(OpenJ9 VM only available for Java versions 8, 11, and 14)
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Java versions supported:
+  - 8   (default)
+  - 11
+  - 14
+  - 15`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("openjdk called")
+		util.CheckRuntime()
+
+		valid := util.CheckValidJDK(util.OpenJDK, jdkVer)
+
+		if valid {
+			fmt.Println("openjdk called")
+		}
 	},
 }
+
+var useOpenJ9 bool
 
 func init() {
 	rootCmd.AddCommand(openjdkCmd)
@@ -50,4 +63,7 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// openjdkCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// correttoCmd.Flags().BoolP("8", "", false, "set JDK version to Java 8")
+	// correttoCmd.Flags().BoolP("11", "", false, "set JDK version to Java 11")
+	openjdkCmd.Flags().BoolVar(&useOpenJ9, "openj9", false, "set the option of using OpenJ9 VM JDK instead of default")
 }

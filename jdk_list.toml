@@ -1,6 +1,4 @@
-# TOML version of the jdks.ini file
-# perhaps this'll look more readable and be "easier" to work with
-# will look into making this file the one that the application works with, but i doubt it, tbh
+# Listing of application known JDKs and the URL chunks to use to download them
 
 # [======= Oracle OpenJDK sources =======================================================]
 [oracle]

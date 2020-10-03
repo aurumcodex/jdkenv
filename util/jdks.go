@@ -1,37 +1,15 @@
 package util
 
-type Oracle struct {
-	Base string `toml:base_url`
-	Data OracleInfo
-}
+const (
+	// Corretto flag for setting/using Corretto as JDK of choice
+	Corretto int = iota
 
-type OracleInfo struct {
-	Ext      string `toml:ext_url`
-	Filename string `toml:filename`
-}
+	// Liberica flag for setting/using Liberica as JDK of choice
+	Liberica int = iota
 
-type Corretto struct {
-	Base string `toml:base_url`
-	Data CorrettoInfo
-}
+	// OpenJDK flag for setting/using OpenJDK as JDK of choice
+	OpenJDK int = iota
 
-type CorrettoInfo struct {
-	Filename string `toml:filename`
-	File     string `toml:file`
-}
-
-type Liberica struct {
-	Base string `toml:base_url`
-	Data LibericaInfo
-}
-
-type LibericaInfo struct {
-	Ext      string `toml:ext_url`
-	Filename string `toml:filename`
-}
-
-type OpenJDK struct {
-}
-
-type OpenJDKInfo struct {
-}
+	// Oracle flag for setting/using Oracle as JDK of choice
+	Oracle int = iota
+)

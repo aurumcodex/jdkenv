@@ -20,20 +20,25 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/aurumcodex/jdkenv/util"
+
 	"github.com/spf13/cobra"
 )
 
 // oracleCmd represents the oracle command
 var oracleCmd = &cobra.Command{
 	Use:   "oracle",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Set usage of Oracle OpenJDK Reference Implementation",
+	Long: `Downloads and extracts (if not already existing) the tarball containing
+the Oracle OpenJDK implementation with the set JDK version parameter.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Java versions supported:
+  - 8    (default)
+  - 11
+  - 15`,
 	Run: func(cmd *cobra.Command, args []string) {
+		util.CheckRuntime()
+
 		fmt.Println("oracle called")
 	},
 }
@@ -50,4 +55,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// oracleCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// correttoCmd.Flags().BoolP("8", "", false, "set JDK version to Java 8")
+	// correttoCmd.Flags().BoolP("11", "", false, "set JDK version to Java 11")
 }

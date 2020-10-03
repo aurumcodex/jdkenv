@@ -20,20 +20,22 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/aurumcodex/jdkenv/util"
+
 	"github.com/spf13/cobra"
 )
 
 // systemCmd represents the system command
 var systemCmd = &cobra.Command{
 	Use:   "system",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Set usage of system installed JDK",
+	Long: `Searches for a JDK implementation that was installed via a
+package manager on your operating system. Default searches /usr/lib64/ for
+an "openjdk-*" directory or similar. Can be set in a toml file called "system.toml"
+if your package manager does not install directly to /usr/lib64 (or /usr/lib32 if using a multilib version)`,
 	Run: func(cmd *cobra.Command, args []string) {
+		util.CheckRuntime()
+
 		fmt.Println("system called")
 	},
 }
@@ -50,4 +52,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// systemCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// correttoCmd.Flags().BoolP("8", "", false, "set JDK version to Java 8 (if installed via package manager)")
+	// correttoCmd.Flags().BoolP("11", "", false, "set JDK version to Java 11 (if installed via package manager)")
 }

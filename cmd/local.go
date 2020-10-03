@@ -20,20 +20,22 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/aurumcodex/jdkenv/util"
+
 	"github.com/spf13/cobra"
 )
 
 // localCmd represents the local command
 var localCmd = &cobra.Command{
 	Use:   "local",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Set usage of a locally installed JDK",
+	Long: `Sets the Java environment to use whichever JDK option you pass to it,
+assuming that it has a name and a path in a local.toml configuration file.
+Whatever you choose, it *must* match whatever you named it within the local.toml file
+in the configuration directory.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		util.CheckRuntime()
+
 		fmt.Println("local called")
 	},
 }

@@ -20,20 +20,24 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/aurumcodex/jdkenv/util"
+
 	"github.com/spf13/cobra"
 )
 
 // correttoCmd represents the corretto command
 var correttoCmd = &cobra.Command{
 	Use:   "corretto",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Set usage of Amazon Corretto JDK",
+	Long: `Downloads and extracts (if not already existing) the tarball containing
+the Amazon Corretto JDK with set JDK version parameter.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Java versions supported:
+  - 8    (default)
+  - 11`,
 	Run: func(cmd *cobra.Command, args []string) {
+		util.CheckRuntime()
+
 		fmt.Println("corretto called")
 	},
 }
@@ -49,5 +53,6 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	correttoCmd.Flags().BoolP("eight", "8", false, "Set ")
+	// correttoCmd.Flags().BoolP("8", "", false, "set JDK version to Java 8")
+	// correttoCmd.Flags().BoolP("11", "", false, "set JDK version to Java 11")
 }
