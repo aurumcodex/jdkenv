@@ -18,38 +18,34 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/aurumcodex/jdkenv/util"
 
 	"github.com/spf13/cobra"
 )
 
-// localCmd represents the local command
-var localCmd = &cobra.Command{
-	Use:   "local",
-	Short: "Set usage of a locally installed JDK",
-	Long: `Sets the Java environment to use whichever JDK option you pass to it,
-assuming that it has a name and a path given in a local.toml configuration file.
-Whatever you choose, it *must* match whatever you named it within the local.toml file
-in the configuration directory.`,
+// errorCmd represents the error command
+var errorsCmd = &cobra.Command{
+	Use:   "errors",
+	Short: "Print error codes and their meanings",
+	Long:  `Prints out the error codes and what they mean.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		util.CheckRuntime()
-
-		fmt.Println("local called")
+		// TODO: add a PrintErrorList() function to util package to have this functionality
+		// (even if it practice it's a big fmt.Printf call)
+		util.PrintErrorList()
+		// fmt.Println("errors called")
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(localCmd)
+	rootCmd.AddCommand(errorsCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// localCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// errorCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// localCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// errorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

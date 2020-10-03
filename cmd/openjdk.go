@@ -19,11 +19,14 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/aurumcodex/jdkenv/util"
 
 	"github.com/spf13/cobra"
 )
+
+var useOpenJ9 bool
 
 // openjdkCmd represents the openjdk command
 var openjdkCmd = &cobra.Command{
@@ -43,13 +46,13 @@ Java versions supported:
 
 		valid := util.CheckValidJDK(util.OpenJDK, jdkVer)
 
-		if valid {
-			fmt.Println("openjdk called")
+		if !valid {
+			fmt.Fprintln(os.Stderr, "Invalid Java version passed. Exiting...")
+			os.Exit(2)
 		}
+		fmt.Println("openjdk called")
 	},
 }
-
-var useOpenJ9 bool
 
 func init() {
 	rootCmd.AddCommand(openjdkCmd)

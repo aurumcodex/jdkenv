@@ -21,12 +21,12 @@ filename = "openjdk-15+36_linux-x64_bin.tar.gz"
 base_url = "https://corretto.aws/downloads/latest/"
 
 [corretto.8]
-filename = "amazon-corretto-8-x64-linux-jdk.tar.gz"
-file = "amazon-corretto-8.265.01.1-linux.x64.tar.gz"
+file_url = "amazon-corretto-8-x64-linux-jdk.tar.gz"
+filename = "amazon-corretto-8.265.01.1-linux.x64.tar.gz"
 
 [corretto.11]
-filename = "amazon-corretto-11-x64-linux-jdk.tar.gz"
-file = "amazon-corretto-11.0.8.10.1-linux.x64.tar.gz"
+file_url = "amazon-corretto-11-x64-linux-jdk.tar.gz"
+filename = "amazon-corretto-11.0.8.10.1-linux.x64.tar.gz"
 
 # [======= BellSoft Liberica JDK sources (uses the "full" jdk) ==========================]
 [liberica]

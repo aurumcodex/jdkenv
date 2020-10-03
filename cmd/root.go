@@ -23,13 +23,14 @@ import (
 
 	"github.com/aurumcodex/jdkenv/util"
 
-	"github.com/logrusorgru/aurora"
+	"github.com/logrusorgru/aurora/v3"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
 )
 
 var jdkVer int
 var color bool
+var spinner bool
 var au aurora.Aurora
 
 // rootCmd represents the base command when called without any subcommands
@@ -38,12 +39,15 @@ var rootCmd = &cobra.Command{
 	Use:     "jdkenv",
 	Short:   "A simple Go program to manage and install (if not found) various JDKs.",
 	Long: `jdkenv :: version 0.1.0
-A simple Go program to manage and install (if not found) various JDKs.`,
+A simple Go program to manage and install (if not found) various JDKs.
+Running this program without a subcommand will only print the set JDK and Java version.
+
+(default JDK and Java version is AdoptOpenJDK 8)`,
 	Run: func(cmd *cobra.Command, args []string) {
 		util.CheckRuntime()
 
 		switch jdkVer {
-		case 8, 11, 14, 15: // will add in support for other Java versions in a later update
+		case 8, 11, 14, 15: // will add in support for other Java versions in later updates
 			break
 		default:
 			fmt.Fprintln(os.Stderr, "Error: Unknown JDK type")
@@ -56,12 +60,18 @@ A simple Go program to manage and install (if not found) various JDKs.`,
 			os.Exit(1)
 		}
 
-		directOpenJDKBaseURL := jdks.Get("openjdk.base_url").(string)
-		// var conf Config
-		// tomlCfg.Unmarshal(&conf)
+		test, _ := toml.LoadFile("test.toml")
 
-		// fmt.Println(conf)
+		directOpenJDKBaseURL := jdks.Get("openjdk.base_url").(string)
+		testArray := jdks.GetArray("test")
+		testArray2 := jdks.GetArrayPath([]string{"name", "path"})
+		mapT := test.ToMap()
+
 		fmt.Println("oracle base_url:", directOpenJDKBaseURL)
+		fmt.Println(testArray)
+		fmt.Println(testArray2)
+		fmt.Println(mapT)
+		fmt.Println(mapT["test.name"])
 	},
 }
 
@@ -75,21 +85,26 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.jdkenv.yaml)")
-
-	rootCmd.PersistentFlags().BoolVar(&color, "no-color", false, "use monochrome output")
+	rootCmd.PersistentFlags().BoolVar(
+		&color,
+		"no-color",
+		false,
+		"use monochrome output",
+	)
 	au = aurora.NewAurora(!color)
 
-	rootCmd.PersistentFlags().IntVarP(&jdkVer, "jdk", "j", 8, "use specific Java version (valid ints: 8, 11, 14, 15)")
+	rootCmd.PersistentFlags().BoolVar(
+		&spinner,
+		"no-spinner",
+		false,
+		"disables the activity spinner (useful for CI or testing)",
+	)
 
-	// rootCmd.PersistentFlags().BoolVar(&use8, "8", false, "set JDK version to Java 8")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	// rootCmd.Flags().BoolP("version", "v", false, "Prints version")
+	rootCmd.PersistentFlags().IntVarP(
+		&jdkVer,
+		"java",
+		"j",
+		8,
+		"use specific Java version (valid: 8, 11, 14, 15)",
+	)
 }

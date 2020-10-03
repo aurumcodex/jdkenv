@@ -19,15 +19,20 @@ limitations under the License.
 package util
 
 const (
-	// Corretto flag for setting/using Corretto as JDK of choice
-	Corretto int = iota
+	// ErrNone is the error code that means that nothing bad happened when executing.
+	ErrNone int = 0
+	// ErrVer is an error code for an invalid JDK/Java version passed into program.
+	ErrVer int = 1
+	// ErrConf is an error code for a configuration file not found.
+	ErrConf int = 2
+	// ErrDL is an error code for a downloading failure.
+	ErrDL int = 3
+	// ErrExtr is an error code for an extraction failure.
+	ErrExtr int = 4
 
-	// Liberica flag for setting/using Liberica as JDK of choice
-	Liberica int = iota
-
-	// OpenJDK flag for setting/using OpenJDK as JDK of choice
-	OpenJDK int = iota
-
-	// Oracle flag for setting/using Oracle as JDK of choice
-	Oracle int = iota
+	// ErrArch is an error code for incompatible CPU architecture.
+	// * Currently unused
+	ErrArch int = 124
+	// ErrOS is an error code for incompatible OS.
+	ErrOS int = 125
 )

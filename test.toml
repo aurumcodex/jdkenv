@@ -1,0 +1,7 @@
+[[test]]
+name = "grug"
+path = "/etc/"
+
+[[test]]
+name = "not grug"
+path = "/home/"
