@@ -19,6 +19,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/aurumcodex/jdkenv/util"
 
@@ -38,21 +39,26 @@ Java versions supported:
 	Run: func(cmd *cobra.Command, args []string) {
 		util.CheckRuntime()
 
-		fmt.Println("corretto called")
+		valid := util.CheckValidJDK(util.OpenJDK, jdkVer)
+		if !valid {
+			fmt.Fprintln(os.Stderr, "Invalid Java version passed. Exiting...")
+			os.Exit(2)
+		}
+
+		errToml, errDL, errExtr := util.SetCorretto("", jdkVer, spinner, noColor, au)
+		if errToml != nil {
+			fmt.Fprintf(os.Stderr, "(e:2)ErrConf - Unable to read jdk_list.toml; error: %v", errToml)
+			os.Exit(util.ErrConf)
+		} else if errDL != nil {
+			fmt.Fprintf(os.Stderr, "(e:3)ErrDL - Error downloading archive; error: %v", errDL)
+			os.Exit(util.ErrDL)
+		} else if errExtr != nil {
+			fmt.Fprintf(os.Stderr, "(e:2)ErrConf - Error extracting archive; error: %v", errExtr)
+			os.Exit(util.ErrExtr)
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(correttoCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// correttoCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// correttoCmd.Flags().BoolP("8", "", false, "set JDK version to Java 8")
-	// correttoCmd.Flags().BoolP("11", "", false, "set JDK version to Java 11")
 }

@@ -29,7 +29,7 @@ import (
 )
 
 var jdkVer int
-var color bool
+var noColor bool
 var spinner bool
 var au aurora.Aurora
 
@@ -86,12 +86,12 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().BoolVar(
-		&color,
+		&noColor,
 		"no-color",
 		false,
 		"use monochrome output",
 	)
-	au = aurora.NewAurora(!color)
+	au = aurora.NewAurora(!noColor)
 
 	rootCmd.PersistentFlags().BoolVar(
 		&spinner,

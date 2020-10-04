@@ -18,6 +18,8 @@ limitations under the License.
 */
 package util
 
+import "fmt"
+
 const (
 	// ErrNone is the error code that means that nothing bad happened when executing.
 	ErrNone int = 0
@@ -36,3 +38,20 @@ const (
 	// ErrOS is an error code for incompatible OS.
 	ErrOS int = 125
 )
+
+// PrintErrorList prints out a list of all error codes that can be generated
+// when running the program.
+func PrintErrorList() {
+	fmt.Print(`jdkenv :: error list
+
+_Code_  _ErrName_  _Description_
+	0    ErrNone    No errors returned; all functions executed correctly
+	1    ErrVer     Invalid/Incompatible version was passed
+    2    ErrConf    JDK list or configuration file(s) not found
+    3    ErrDL      Downloading error
+    4    ErrExtr    Archive extraction error
+
+  124    ErrArch    Architecture not supported (currently unused)
+  125    ErrOS      Operating system not supported
+`)
+}

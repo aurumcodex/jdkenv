@@ -86,13 +86,10 @@ Loop:
 		}
 	}
 
-	// if err := response.Err(); err != nil {
-	// 	fmt.Fprintf(os.Stderr, "Download failed: %v\n", err)
-	// 	os.Exit(1)
-	// }
-
-	fmt.Print("\033[2K")
-	fmt.Printf("%v %v\n", aur.Bold(aur.Green("  Downloaded ")), response.Filename)
+	if response.Err() == nil {
+		fmt.Print("\033[2K")
+		fmt.Printf("%v %v\n", aur.Bold(aur.Green("  Downloaded ")), response.Filename)
+	}
 
 	return response.Err()
 }

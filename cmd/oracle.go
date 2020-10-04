@@ -19,6 +19,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/aurumcodex/jdkenv/util"
 
@@ -39,7 +40,23 @@ Java versions supported:
 	Run: func(cmd *cobra.Command, args []string) {
 		util.CheckRuntime()
 
-		fmt.Println("oracle called")
+		valid := util.CheckValidJDK(util.OpenJDK, jdkVer)
+		if !valid {
+			fmt.Fprintln(os.Stderr, "(e:1)ErrVer - ")
+			os.Exit(util.ErrVer)
+		}
+
+		errToml, errDL, errExtr := util.SetOracle("", jdkVer, spinner, noColor, au)
+		if errToml != nil {
+			fmt.Fprintf(os.Stderr, "(e:2)ErrConf - Unable to read jdk_list.toml; error: %v", errToml)
+			os.Exit(util.ErrConf)
+		} else if errDL != nil {
+			fmt.Fprintf(os.Stderr, "(e:3)ErrDL - Error downloading archive; error: %v", errDL)
+			os.Exit(util.ErrDL)
+		} else if errExtr != nil {
+			fmt.Fprintf(os.Stderr, "(e:4)ErrExtr - Error extracting archive; error: %v", errExtr)
+			os.Exit(util.ErrExtr)
+		}
 	},
 }
 

@@ -43,7 +43,7 @@ func BuildString(inputs ...string) string {
 func CheckRuntime() {
 	if runtime.GOOS == "windows" {
 		fmt.Println("This application was not designed to be used in a Windows environment at this time.")
-		os.Exit(125)
+		os.Exit(ErrOS)
 	}
 }
 
@@ -86,21 +86,4 @@ func CheckValidJDK(jdk, version int) bool {
 	default:
 		return false
 	}
-}
-
-// PrintErrorList prints out a list of all error codes that can be generated
-// when running the program.
-func PrintErrorList() {
-	fmt.Print(`jdkenv :: error list
-
-_Code_  _ErrName_  _Description_
-	0    ErrNone    No errors returned; all functions executed correctly
-	1    ErrVer     Invalid/Incompatible version was passed
-    2    ErrConf    JDK list or configuration file(s) not found
-    3    ErrDL      Downloading error
-    4    ErrExtr    Archive extraction error
-
-  124    ErrArch    Architecture not supported
-  125    ErrOS      Operating system not supported
-`)
 }

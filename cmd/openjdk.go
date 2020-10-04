@@ -45,12 +45,22 @@ Java versions supported:
 		util.CheckRuntime()
 
 		valid := util.CheckValidJDK(util.OpenJDK, jdkVer)
-
 		if !valid {
 			fmt.Fprintln(os.Stderr, "Invalid Java version passed. Exiting...")
 			os.Exit(2)
 		}
-		fmt.Println("openjdk called")
+
+		errToml, errDL, errExtr := util.SetOpenJDK("", jdkVer, useOpenJ9, spinner, noColor, au)
+		if errToml != nil {
+			fmt.Fprintf(os.Stderr, "(e:2)ErrConf - Unable to read jdk_list.toml; error: %v", errToml)
+			os.Exit(util.ErrConf)
+		} else if errDL != nil {
+			fmt.Fprintf(os.Stderr, "(e:3)ErrDL - Error downloading archive; error: %v", errDL)
+			os.Exit(util.ErrDL)
+		} else if errExtr != nil {
+			fmt.Fprintf(os.Stderr, "(e:4)ErrExtr - Error extracting archive; error: %v", errExtr)
+			os.Exit(util.ErrExtr)
+		}
 	},
 }
 

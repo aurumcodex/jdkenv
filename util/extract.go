@@ -20,7 +20,6 @@ package util
 
 import (
 	"fmt"
-	"os"
 	"time"
 
 	spin "github.com/briandowns/spinner"
@@ -30,30 +29,25 @@ import (
 
 // Extract wraps `archiver.Unarchive()` for simplicity, with added spinner effect.
 // Takes path parameter and extracts to dest parameter.
-func Extract(path, dest string, spinner bool, aur aurora.Aurora) error {
+func Extract(path, dest string, spinner, color bool, aur aurora.Aurora) error {
 	if spinner {
 		s := spin.New(charSet, 100*time.Millisecond)
 		s.Prefix = "  "
 		s.Suffix = fmt.Sprintf("%v %v", aur.Bold(aur.Cyan(" Extracting:")), path)
 		s.FinalMSG = fmt.Sprintf("   %v %v\n", aur.Bold(aur.Green(" Extracted")), path)
-		s.Color("bold", "yellow")
+		if color {
+			s.Color("bold", "yellow")
+		}
 
 		s.Start()
 		err := arc.Unarchive(path, dest)
 		s.Stop()
 
 		return err
-	} else {
-		fmt.Printf("Extracting: %v", path)
-		err := arc.Unarchive(path, dest)
-		if err != nil {
-			fmt.Fprintf(os.Stderr,
-				"An error occurred when extracting %v; err = %v",
-				path, err,
-			)
-			os.Exit(1)
-		}
-
-		return err
 	}
+
+	fmt.Printf("Extracting: %v", path)
+	err := arc.Unarchive(path, dest)
+
+	return err
 }

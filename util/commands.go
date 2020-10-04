@@ -26,12 +26,10 @@ import (
 	toml "github.com/pelletier/go-toml"
 )
 
-// SetCorretto sets the Java environment to use the
-func SetCorretto(dest string, version int, spinner bool, aur aurora.Aurora) (error, error, error) {
+// SetCorretto sets the Java environment to use the Amazon Corretto JDK.
+func SetCorretto(dest string, version int, spin, color bool, aur aurora.Aurora) (error, error, error) {
 	jdks, eToml := toml.LoadFile("jdk_list.toml")
 	if eToml != nil {
-		// fmt.Fprintf(os.Stderr, "Unable to read JDK list file; error = %v", err)
-		// os.Exit(1)
 		return eToml, nil, nil
 	}
 
@@ -43,10 +41,13 @@ func SetCorretto(dest string, version int, spinner bool, aur aurora.Aurora) (err
 			jdks.Get("corretto.8.file_url").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		if eDL := Download(url, dest, spinner, aur); eDL != nil {
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
 			return nil, eDL, nil
 		}
-		if eExtr := Extract(jdks.Get("corretto.8.filename").(string), dest, spinner, aur); eExtr != nil {
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("corretto.8.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
 			return nil, nil, eExtr
 		}
 
@@ -56,27 +57,289 @@ func SetCorretto(dest string, version int, spinner bool, aur aurora.Aurora) (err
 			jdks.Get("corretto.11.file_url").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		if eDL := Download(url, dest, spinner, aur); eDL != nil {
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
 			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("corretto.11.file_url").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
 		}
 
 	default:
-		fmt.Fprintln(os.Stderr, "Invalid version passed")
-		os.Exit(1)
+		fmt.Fprintln(os.Stderr, "(e:1)ErrVer: Invalid version passed:", version)
+		os.Exit(ErrVer)
 	}
 
-	// shadow the older error from loading the TOML file
-	// err := util.Download(url, dest, spinner, aur)
-	// if err != nil {
-	// 	fmt.Fprintf(os.Stderr, "Download failed: %v\n", err)
-	// 	os.Exit(1)
-	// }
-	// if eDL := Download(url, dest, spinner, aur); eDL != nil {
-	// 	return nil, eDL, nil
-	// }
+	return nil, nil, nil
+}
 
-	// shadow the older error from the downloading of tarball
-	// err := util.Extract(jdks.Get("corretto."))
+// SetLiberica sets the Java environment to use the BellSoft Liberica JDK.
+func SetLiberica(dest string, version int, spin, color bool, aur aurora.Aurora) (error, error, error) {
+	jdks, eToml := toml.LoadFile("jdk_list.toml")
+	if eToml != nil {
+		return eToml, nil, nil
+	}
+
+	var url string
+	switch version {
+	case 8:
+		url = BuildString(
+			jdks.Get("liberica.base_url").(string),
+			jdks.Get("liberica.8.ext_url").(string),
+			jdks.Get("liberica.8.filename").(string),
+		)
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("liberica.8.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	case 11:
+		url = BuildString(
+			jdks.Get("liberica.base_url").(string),
+			jdks.Get("liberica.11.ext_url").(string),
+			jdks.Get("liberica.11.filename").(string),
+		)
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("liberica.11.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	case 15:
+		url = BuildString(
+			jdks.Get("liberica.base_url").(string),
+			jdks.Get("liberica.15.ext_url").(string),
+			jdks.Get("liberica.15.filename").(string),
+		)
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("liberica.15.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	default:
+		fmt.Fprintln(os.Stderr, "(e:1)ErrVer: Invalid version passed:", version)
+		os.Exit(ErrVer)
+	}
+
+	return nil, nil, nil
+}
+
+// SetOpenJDK sets the Java environment to use an AdoptOpenJDK implementation.
+func SetOpenJDK(dest string, version int, openj9, spin, color bool, aur aurora.Aurora) (error, error, error) {
+	jdks, eToml := toml.LoadFile("jdk_list.toml")
+	if eToml != nil {
+		return eToml, nil, nil
+	}
+
+	var url string
+	switch version {
+	case 8:
+		if openj9 {
+			url = BuildString(
+				jdks.Get("openjdk.base_url").(string),
+				jdks.Get("openjdk.8.ext_url").(string),
+				jdks.Get("openjdk.release_path").(string),
+				jdks.Get("openjdk.8.openj9.tag").(string),
+				jdks.Get("openjdk.8.openj9.filename").(string),
+			)
+		} else {
+			url = BuildString(
+				jdks.Get("openjdk.base_url").(string),
+				jdks.Get("openjdk.8.ext_url").(string),
+				jdks.Get("openjdk.release_path").(string),
+				jdks.Get("openjdk.8.tag").(string),
+				jdks.Get("openjdk.8.filename").(string),
+			)
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		var eExtr error
+		if openj9 {
+			eExtr = Extract(jdks.Get("openjdk.8.openj9.filename").(string), dest, spin, color, aur)
+		} else {
+			eExtr = Extract(jdks.Get("openjdk.8.filename").(string), dest, spin, color, aur)
+		}
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	case 11:
+		if openj9 {
+			url = BuildString(
+				jdks.Get("openjdk.base_url").(string),
+				jdks.Get("openjdk.11.ext_url").(string),
+				jdks.Get("openjdk.release_path").(string),
+				jdks.Get("openjdk.11.openj9.tag").(string),
+				jdks.Get("openjdk.11.openj9.filename").(string),
+			)
+		} else {
+			url = BuildString(
+				jdks.Get("openjdk.base_url").(string),
+				jdks.Get("openjdk.11.ext_url").(string),
+				jdks.Get("openjdk.release_path").(string),
+				jdks.Get("openjdk.11.tag").(string),
+				jdks.Get("openjdk.11.filename").(string),
+			)
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		var eExtr error
+		if openj9 {
+			eExtr = Extract(jdks.Get("openjdk.11.openjdk.filename").(string), dest, spin, color, aur)
+		} else {
+			eExtr = Extract(jdks.Get("openjdk.11.filename").(string), dest, spin, color, aur)
+		}
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	case 14:
+		if openj9 {
+			url = BuildString(
+				jdks.Get("openjdk.base_url").(string),
+				jdks.Get("openjdk.14.ext_url").(string),
+				jdks.Get("openjdk.release_path").(string),
+				jdks.Get("openjdk.14.openj9.tag").(string),
+				jdks.Get("openjdk.14.openj9.filename").(string),
+			)
+		} else {
+			url = BuildString(
+				jdks.Get("openjdk.base_url").(string),
+				jdks.Get("openjdk.14.ext_url").(string),
+				jdks.Get("openjdk.release_path").(string),
+				jdks.Get("openjdk.14.tag").(string),
+				jdks.Get("openjdk.14.filename").(string),
+			)
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("openjdk.14.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	case 15:
+		url = BuildString(
+			jdks.Get("openjdk.base_url").(string),
+			jdks.Get("openjdk.15.ext_url").(string),
+			jdks.Get("openjdk.release_path").(string),
+			jdks.Get("openjdk.15.tag").(string),
+			jdks.Get("openjdk.15.filename").(string),
+		)
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("openjdk.15.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	default:
+		fmt.Fprintln(os.Stderr, "(e:1)ErrVer: Invalid version passed:", version)
+		os.Exit(ErrVer)
+	}
+
+	return nil, nil, nil
+}
+
+// SetOracle sets the Java environment to use a reference implementation of OpenJDK built by Oracle.
+func SetOracle(dest string, version int, spin, color bool, aur aurora.Aurora) (error, error, error) {
+	jdks, eToml := toml.LoadFile("jdk_list.toml")
+	if eToml != nil {
+		return eToml, nil, nil
+	}
+
+	var url string
+	switch version {
+	case 8:
+		url = BuildString(
+			jdks.Get("oracle.base_url").(string),
+			jdks.Get("oracle.8.ext_url").(string),
+			jdks.Get("oracle.8.filename").(string),
+		)
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("oracle.8.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	case 11:
+		url = BuildString(
+			jdks.Get("oracle.base_url").(string),
+			jdks.Get("oracle.11.ext_url").(string),
+			jdks.Get("oracle.11.filename").(string),
+		)
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("oracle.11.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	case 15:
+		url = BuildString(
+			jdks.Get("oracle.base_url").(string),
+			jdks.Get("oracle.15.ext_url").(string),
+			jdks.Get("oracle.15.filename").(string),
+		)
+		// need to add in checks to see if the extracted directory exists first
+		eDL := Download(url, dest, spin, aur)
+		if eDL != nil {
+			return nil, eDL, nil
+		}
+		// need to add in checks to see if the extracted directory exists first
+		eExtr := Extract(jdks.Get("oracle.15.filename").(string), dest, spin, color, aur)
+		if eExtr != nil {
+			return nil, nil, eExtr
+		}
+
+	default:
+		fmt.Fprintln(os.Stderr, "(e:1)ErrVer: Invalid version passed:", version)
+		os.Exit(ErrVer)
+	}
 
 	return nil, nil, nil
 }

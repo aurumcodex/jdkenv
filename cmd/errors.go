@@ -29,23 +29,10 @@ var errorsCmd = &cobra.Command{
 	Short: "Print error codes and their meanings",
 	Long:  `Prints out the error codes and what they mean.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: add a PrintErrorList() function to util package to have this functionality
-		// (even if it practice it's a big fmt.Printf call)
 		util.PrintErrorList()
-		// fmt.Println("errors called")
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(errorsCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// errorCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// errorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
