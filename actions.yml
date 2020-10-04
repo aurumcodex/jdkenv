@@ -1,5 +1,0 @@
-name: local builder
-description: build repo project
-runs:
-  using: docker
-  image: golang:latest
