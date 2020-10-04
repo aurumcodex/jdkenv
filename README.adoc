@@ -30,6 +30,7 @@ Usage:
 
 Available Commands:
   corretto    Set usage of Amazon Corretto JDK
+  errors      Print error codes and their meanings
   help        Help about any command
   liberica    Set usage of BellSoft Liberica JDK
   local       Set usage of a locally installed JDK
@@ -38,9 +39,10 @@ Available Commands:
   system      Set usage of system installed JDK
 
 Flags:
-  -h, --help       help for jdkenv
-  -j, --jdk int    use specific Java version (valid ints: 8, 11, 14, 15) (default 8)
-      --no-color   use monochrome output
+  -h, --help         help for jdkenv
+  -j, --java int     use specific Java version (valid: 8, 11, 14, 15) (default 8)
+      --no-color     use monochrome output
+      --no-spinner   disables the activity spinner (useful for CI or testing)
 ----
 
 == Supported JDKs

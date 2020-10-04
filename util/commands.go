@@ -41,7 +41,7 @@ func SetCorretto(dest string, version int, spin, color bool, aur aurora.Aurora) 
 			jdks.Get("corretto.8.file_url").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Corretto, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -57,7 +57,7 @@ func SetCorretto(dest string, version int, spin, color bool, aur aurora.Aurora) 
 			jdks.Get("corretto.11.file_url").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Corretto, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -91,7 +91,7 @@ func SetLiberica(dest string, version int, spin, color bool, aur aurora.Aurora) 
 			jdks.Get("liberica.8.filename").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Liberica, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -108,7 +108,7 @@ func SetLiberica(dest string, version int, spin, color bool, aur aurora.Aurora) 
 			jdks.Get("liberica.11.filename").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Liberica, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -125,7 +125,7 @@ func SetLiberica(dest string, version int, spin, color bool, aur aurora.Aurora) 
 			jdks.Get("liberica.15.filename").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Liberica, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -171,7 +171,7 @@ func SetOpenJDK(dest string, version int, openj9, spin, color bool, aur aurora.A
 			)
 		}
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(OpenJDK, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -205,7 +205,7 @@ func SetOpenJDK(dest string, version int, openj9, spin, color bool, aur aurora.A
 			)
 		}
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(OpenJDK, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -239,7 +239,7 @@ func SetOpenJDK(dest string, version int, openj9, spin, color bool, aur aurora.A
 			)
 		}
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(OpenJDK, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -258,7 +258,7 @@ func SetOpenJDK(dest string, version int, openj9, spin, color bool, aur aurora.A
 			jdks.Get("openjdk.15.filename").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(OpenJDK, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -292,7 +292,7 @@ func SetOracle(dest string, version int, spin, color bool, aur aurora.Aurora) (e
 			jdks.Get("oracle.8.filename").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Oracle, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -309,7 +309,7 @@ func SetOracle(dest string, version int, spin, color bool, aur aurora.Aurora) (e
 			jdks.Get("oracle.11.filename").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Oracle, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}
@@ -326,7 +326,7 @@ func SetOracle(dest string, version int, spin, color bool, aur aurora.Aurora) (e
 			jdks.Get("oracle.15.filename").(string),
 		)
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(url, dest, spin, aur)
+		eDL := Download(Oracle, version, url, dest, spin, aur)
 		if eDL != nil {
 			return nil, eDL, nil
 		}

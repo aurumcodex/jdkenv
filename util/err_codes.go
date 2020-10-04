@@ -45,8 +45,8 @@ func PrintErrorList() {
 	fmt.Print(`jdkenv :: error list
 
 _Code_  _ErrName_  _Description_
-	0    ErrNone    No errors returned; all functions executed correctly
-	1    ErrVer     Invalid/Incompatible version was passed
+    0    ErrNone    No errors returned; all functions executed correctly
+    1    ErrVer     Invalid/Incompatible version was passed
     2    ErrConf    JDK list or configuration file(s) not found
     3    ErrDL      Downloading error
     4    ErrExtr    Archive extraction error

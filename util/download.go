@@ -30,15 +30,18 @@ import (
 var charSet = []string{"⠁", "⠉", "⠙", "⠸", "⢰", "⣠", "⣄", "⡆", "⠇", "⠃", "⠁"}
 
 // Download gets a file from a given string and stores it.
-func Download(url, dest string, spinner bool, aur aurora.Aurora) error {
-	// consider adding parameters for aurora state and target destination
+func Download(jdk, version int, url, dest string, spinner bool, aur aurora.Aurora) error {
 	client := grab.NewClient()
 	req, _ := grab.NewRequest(dest, url)
 
 	urlStr := strings.SplitN(req.URL().String(), "/", -1)
 	fmt.Print(aur.Bold(aur.Cyan("  Downloading ")))
-
-	fmt.Println(urlStr)
+	fmt.Println(urlStr[len(urlStr)-1])
+	// if jdk == Corretto {
+	// 	fmt.Println(urlStr[len(urlStr)-1])
+	// } else {
+	// 	fmt.Println(urlStr[len(urlStr)-1])
+	// }
 
 	response := client.Do(req)
 

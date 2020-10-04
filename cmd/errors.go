@@ -27,7 +27,8 @@ import (
 var errorsCmd = &cobra.Command{
 	Use:   "errors",
 	Short: "Print error codes and their meanings",
-	Long:  `Prints out the error codes and what they mean.`,
+	Long: `Prints out the error codes and what they mean.
+Mostly used for debugging and shouldn't be needed for day to day use.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		util.PrintErrorList()
 	},

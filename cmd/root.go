@@ -24,8 +24,8 @@ import (
 	"github.com/aurumcodex/jdkenv/util"
 
 	"github.com/logrusorgru/aurora/v3"
-	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
+	"gopkg.in/ini.v1"
 )
 
 var jdkVer int
@@ -50,28 +50,31 @@ Running this program without a subcommand will only print the set JDK and Java v
 		case 8, 11, 14, 15: // will add in support for other Java versions in later updates
 			break
 		default:
-			fmt.Fprintln(os.Stderr, "Error: Unknown JDK type")
-			os.Exit(1)
+			fmt.Fprintln(os.Stderr, "(e:1)ErrVer - Unknown Java version given:", jdkVer)
+			os.Exit(util.ErrVer)
 		}
 
-		jdks, err := toml.LoadFile("jdk_list.toml")
+		// jdks, err := toml.LoadFile("jdk_list.toml")
+		// if err != nil {
+		// 	fmt.Fprintf(os.Stderr, "Unable to read JDK list file; error = %v", err)
+		// 	os.Exit(1)
+		// }
+
+		// directOpenJDKBaseURL := jdks.Get("openjdk.base_url").(string)
+		// fmt.Println("openjdk base_url:", directOpenJDKBaseURL)
+		cfg, err := ini.LoadSources(ini.LoadOptions{
+			SkipUnrecognizableLines: true,
+		}, "config.ini")
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Unable to read JDK list file; error = %v", err)
-			os.Exit(1)
+			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", err)
+			os.Exit(util.ErrConf)
 		}
 
-		test, _ := toml.LoadFile("test.toml")
+		jdkRI := cfg.Section("").Key("JDK_RI").String()
+		
 
-		directOpenJDKBaseURL := jdks.Get("openjdk.base_url").(string)
-		testArray := jdks.GetArray("test")
-		testArray2 := jdks.GetArrayPath([]string{"name", "path"})
-		mapT := test.ToMap()
-
-		fmt.Println("oracle base_url:", directOpenJDKBaseURL)
-		fmt.Println(testArray)
-		fmt.Println(testArray2)
-		fmt.Println(mapT)
-		fmt.Println(mapT["test.name"])
+		fmt.Println("Java environment:")
+		fmt.Printf("JDK :: %v")
 	},
 }
 
