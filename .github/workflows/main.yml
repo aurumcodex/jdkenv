@@ -2,9 +2,10 @@ on: [push]
 
 jobs:
   build_app:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: build application
         id: compile
-        uses: aurumcodex/jdkenv@main
+        #uses: aurumcodex/jdkenv@main
         run: CGO_ENABLED=0 go build; ./jdkenv help
