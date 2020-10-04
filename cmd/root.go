@@ -71,10 +71,12 @@ Running this program without a subcommand will only print the set JDK and Java v
 		}
 
 		jdkRI := cfg.Section("").Key("JDK_RI").String()
-		
+		openj9, _ := cfg.Section("").Key("OPENJ9").Bool()
 
 		fmt.Println("Java environment:")
-		fmt.Printf("JDK :: %v")
+		fmt.Printf("Implementation :: %v\n", jdkRI)
+		fmt.Printf("  Java Version :: %v\n", jdkVer)
+		fmt.Printf(" Using OpenJ9? :: %v\n", openj9)
 	},
 }
 
