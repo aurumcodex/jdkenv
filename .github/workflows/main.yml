@@ -1,7 +1,17 @@
 on: [push]
 
 jobs:
-  build_app:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15.0'
+      - name: test application
+        id: test
+        run: go test github.com/aurumcodex/jdkenv/util
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -10,4 +20,4 @@ jobs:
           go-version: '^1.15.0'
       - name: build application
         id: compile
-        run: bash actions.sh
+        run: CGO_ENABLE=0 go build -ldflags="-s -w"; bash actions.sh

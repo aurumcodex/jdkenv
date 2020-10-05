@@ -20,6 +20,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/aurumcodex/jdkenv/util"
 
@@ -31,6 +32,8 @@ import (
 var jdkVer int
 var noColor bool
 var spinner bool
+var cfg *ini.File
+var cfgErr error
 var au aurora.Aurora
 
 // rootCmd represents the base command when called without any subcommands
@@ -54,27 +57,22 @@ Running this program without a subcommand will only print the set JDK and Java v
 			os.Exit(util.ErrVer)
 		}
 
-		// jdks, err := toml.LoadFile("jdk_list.toml")
-		// if err != nil {
-		// 	fmt.Fprintf(os.Stderr, "Unable to read JDK list file; error = %v", err)
-		// 	os.Exit(1)
-		// }
-
-		// directOpenJDKBaseURL := jdks.Get("openjdk.base_url").(string)
-		// fmt.Println("openjdk base_url:", directOpenJDKBaseURL)
-		cfg, err := ini.LoadSources(ini.LoadOptions{
+		cfg, cfgErr = ini.LoadSources(ini.LoadOptions{
 			SkipUnrecognizableLines: true,
 		}, "config.ini")
-		if err != nil {
-			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", err)
+		if cfgErr != nil {
+			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", cfgErr)
 			os.Exit(util.ErrConf)
 		}
 
+		// consider putting this into another util file to get this info.
+		// and to have it be much more flexible
 		jdkRI := cfg.Section("").Key("JDK_RI").String()
+		jdk := strings.SplitN(jdkRI, ".", -1)
 		openj9, _ := cfg.Section("").Key("OPENJ9").Bool()
 
 		fmt.Println("Java environment:")
-		fmt.Printf("Implementation :: %v\n", jdkRI)
+		fmt.Printf("Implementation :: %v\n", jdk[0])
 		fmt.Printf("  Java Version :: %v\n", jdkVer)
 		fmt.Printf(" Using OpenJ9? :: %v\n", openj9)
 	},
