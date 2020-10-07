@@ -24,6 +24,7 @@ import (
 	"github.com/aurumcodex/jdkenv/util"
 
 	"github.com/spf13/cobra"
+	"gopkg.in/ini.v1"
 )
 
 // libericaCmd represents the liberica command
@@ -46,7 +47,17 @@ Java versions supported:
 			os.Exit(2)
 		}
 
-		errToml, errDL, errExtr := util.SetLiberica("", jdkVer, spinner, noColor, au)
+		cfg, cfgErr = ini.LoadSources(ini.LoadOptions{
+			SkipUnrecognizableLines: true,
+		}, "config.ini")
+		if cfgErr != nil {
+			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", cfgErr)
+			os.Exit(util.ErrConf)
+		}
+
+		dest := cfg.Section("paths").Key("target").String()
+
+		errToml, errDL, errExtr := util.SetLiberica(dest, jdkVer, spinner, noColor, au)
 		if errToml != nil {
 			fmt.Fprintf(os.Stderr, "(e:2)ErrConf - Unable to read jdk_list.toml; error: %v", errToml)
 			os.Exit(util.ErrConf)

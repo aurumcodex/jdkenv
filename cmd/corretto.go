@@ -24,6 +24,7 @@ import (
 	"github.com/aurumcodex/jdkenv/util"
 
 	"github.com/spf13/cobra"
+	"gopkg.in/ini.v1"
 )
 
 // correttoCmd represents the corretto command
@@ -45,8 +46,16 @@ Java versions supported:
 			os.Exit(2)
 		}
 
+		cfg, cfgErr = ini.LoadSources(ini.LoadOptions{
+			SkipUnrecognizableLines: true,
+		}, "config.ini")
+		if cfgErr != nil {
+			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", cfgErr)
+			os.Exit(util.ErrConf)
+		}
+
 		// dest := cfg.Section("paths").Key("target").String()
-		dest := "."
+		dest := util.BuildString(cfg.Section("paths").Key("target").String(), "amazon_corretto.tar.gz")
 
 		errToml, errDL, errExtr := util.SetCorretto(dest, jdkVer, spinner, noColor, au)
 		if errToml != nil {
