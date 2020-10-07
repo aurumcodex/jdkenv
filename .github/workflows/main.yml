@@ -11,3 +11,11 @@ jobs:
       - name: test application
         id: test
         run: bash actions.sh
+      - uses: actions/upload-artifact@v2
+        with:
+          name: jdkenv
+          path: |
+            ./jdkenv
+            ./jdk_list.toml
+            ./config.ini
+            ./README.adoc
