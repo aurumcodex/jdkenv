@@ -247,9 +247,9 @@ func TestCheckValidJDK(t *testing.T) {
 	j14 := CheckValidJDK(OpenJ9, v14)
 	j15 := CheckValidJDK(OpenJ9, v15)
 	j21 := CheckValidJDK(OpenJ9, v21)
-	if !j8 || !j11 || !j14 || !j15 {
+	if !j8 || !j11 || !j14 {
 		t.Error("CheckValidJDK(OpenJ9): wanted true; got false")
-	} else if j21 {
+	} else if j15 || j21 {
 		t.Error("CheckValidJDK(OpenJ9): wanted false; got true")
 	}
 

@@ -76,6 +76,14 @@ func CheckValidJDK(jdk, version int) bool {
 			return false
 		}
 
+	case OpenJ9:
+		switch version {
+		case 8, 11, 14:
+			return true
+		default:
+			return false
+		}
+
 	case Oracle:
 		switch version {
 		case 8, 11, 15:
