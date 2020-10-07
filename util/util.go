@@ -40,6 +40,7 @@ func BuildString(inputs ...string) string {
 }
 
 // CheckRuntime is a wrapper to check if the environment is Windows or not.
+// Used since Windows is not currently supported at this time.
 func CheckRuntime() {
 	if runtime.GOOS == "windows" {
 		fmt.Println("This application was not designed to be used in a Windows environment at this time.")

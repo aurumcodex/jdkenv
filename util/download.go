@@ -20,7 +20,7 @@ package util
 
 import (
 	"fmt"
-	"strings"
+	// "strings"
 	"time"
 
 	"github.com/cavaliercoder/grab"
@@ -29,14 +29,33 @@ import (
 
 var charSet = []string{"⠁", "⠉", "⠙", "⠸", "⢰", "⣠", "⣄", "⡆", "⠇", "⠃", "⠁"}
 
+// JDKType returns a string for the Download function to print which JDK and version is being downloaded.
+func JDKType(jdk, version int) string {
+	switch jdk {
+	case Corretto:
+		return fmt.Sprintf("Amazon Corretto, version %v", version)
+	case Liberica:
+		return fmt.Sprintf("BellSoft Liberica, version %v", version)
+	case OpenJDK:
+		return fmt.Sprintf("AdoptOpenJDK (Hotspot JVM), version %v", version)
+	case OpenJ9:
+		return fmt.Sprintf("AdoptOpenJDK (OpenJ9 JVM), version %v", version)
+	case Oracle:
+		return fmt.Sprintf("Oracle OpenJDK, version %v", version)
+	}
+	return ""
+}
+
 // Download gets a file from a given string and stores it.
 func Download(jdk, version int, url, dest string, spinner bool, aur aurora.Aurora) error {
+	fmt.Println("spinner =", spinner)
 	client := grab.NewClient()
 	req, _ := grab.NewRequest(dest, url)
 
-	urlStr := strings.SplitN(req.URL().String(), "/", -1)
+	// urlStr := strings.SplitN(req.URL().String(), "/", -1)
 	fmt.Print(aur.Bold(aur.Cyan("  Downloading ")))
-	fmt.Println(urlStr[len(urlStr)-1])
+	fmt.Println(JDKType(jdk, version))
+	// fmt.Println(urlStr[len(urlStr)-1])
 	// if jdk == Corretto {
 	// 	fmt.Println(urlStr[len(urlStr)-1])
 	// } else {
@@ -49,10 +68,10 @@ func Download(jdk, version int, url, dest string, spinner bool, aur aurora.Auror
 	fmt.Println(response.HTTPResponse.Status)
 
 	var t *time.Ticker
-	if spinner {
-		t = time.NewTicker(100 * time.Millisecond)
-		defer t.Stop()
-	}
+	// if spinner {
+	t = time.NewTicker(100 * time.Millisecond)
+	defer t.Stop()
+	// }
 
 	frame := 0
 Loop:
@@ -91,7 +110,7 @@ Loop:
 
 	if response.Err() == nil {
 		fmt.Print("\033[2K")
-		fmt.Printf("%v %v\n", aur.Bold(aur.Green("  Downloaded ")), response.Filename)
+		fmt.Printf("%v %v\n", aur.Bold(aur.Green("   Downloaded")), response.Filename)
 	}
 
 	return response.Err()

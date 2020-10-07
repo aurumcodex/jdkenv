@@ -192,3 +192,69 @@ func TestBuildOpenJDKOpenJ9URL(t *testing.T) {
 		t.Errorf("BuildString(baseURLOpenJDK, extURL14, releaseURL, tag14, fileURL14) = %v; wanted : %v", result, url14)
 	}
 }
+
+func TestCheckValidJDK(t *testing.T) {
+	const (
+		v8  = 8
+		v11 = 11
+		v14 = 14
+		v15 = 15
+		v21 = 21
+	)
+
+	c8 := CheckValidJDK(Corretto, v8)
+	c11 := CheckValidJDK(Corretto, v11)
+	c15 := CheckValidJDK(Corretto, v15)
+	if !c8 || !c11 {
+		t.Error("CheckValidJDK(Corretto): wanted true; got false")
+	} else if c15 {
+		t.Error("CheckValidJDK(Corretto): wanted false; got true")
+	}
+
+	l8 := CheckValidJDK(Liberica, v8)
+	l11 := CheckValidJDK(Liberica, v11)
+	l15 := CheckValidJDK(Liberica, v15)
+	l21 := CheckValidJDK(Liberica, v21)
+	if !l8 || !l11 || !l15 {
+		t.Error("CheckValidJDK(Liberica): wanted true; got false")
+	} else if l21 {
+		t.Error("CheckValidJDK(Liberica): wanted false; got true")
+	}
+
+	r8 := CheckValidJDK(Oracle, v8)
+	r11 := CheckValidJDK(Oracle, v11)
+	r15 := CheckValidJDK(Oracle, v15)
+	r21 := CheckValidJDK(Oracle, v21)
+	if !r8 || !r11 || !r15 {
+		t.Error("CheckValidJDK(Oracle): wanted true; got false")
+	} else if r21 {
+		t.Error("CheckValidJDK(Oracle): wanted false; got true")
+	}
+
+	o8 := CheckValidJDK(OpenJDK, v8)
+	o11 := CheckValidJDK(OpenJDK, v11)
+	o14 := CheckValidJDK(OpenJDK, v14)
+	o15 := CheckValidJDK(OpenJDK, v15)
+	o21 := CheckValidJDK(OpenJDK, v21)
+	if !o8 || !o11 || !o14 || !o15 {
+		t.Error("CheckValidJDK(OpenJDK): wanted true; got false")
+	} else if o21 {
+		t.Error("CheckValidJDK(OpenJDK): wanted false; got true")
+	}
+
+	j8 := CheckValidJDK(OpenJ9, v8)
+	j11 := CheckValidJDK(OpenJ9, v11)
+	j14 := CheckValidJDK(OpenJ9, v14)
+	j15 := CheckValidJDK(OpenJ9, v15)
+	j21 := CheckValidJDK(OpenJ9, v21)
+	if !j8 || !j11 || !j14 || !j15 {
+		t.Error("CheckValidJDK(OpenJ9): wanted true; got false")
+	} else if j21 {
+		t.Error("CheckValidJDK(OpenJ9): wanted false; got true")
+	}
+
+	bad := CheckValidJDK(42, v21)
+	if bad != false {
+		t.Error("CheckValidJDK(): default case returned erroroneous result")
+	}
+}

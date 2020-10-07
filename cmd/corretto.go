@@ -45,15 +45,18 @@ Java versions supported:
 			os.Exit(2)
 		}
 
-		errToml, errDL, errExtr := util.SetCorretto("", jdkVer, spinner, noColor, au)
+		// dest := cfg.Section("paths").Key("target").String()
+		dest := "."
+
+		errToml, errDL, errExtr := util.SetCorretto(dest, jdkVer, spinner, noColor, au)
 		if errToml != nil {
-			fmt.Fprintf(os.Stderr, "(e:2)ErrConf - Unable to read jdk_list.toml; error: %v", errToml)
+			fmt.Fprintf(os.Stderr, "\n(e:2)ErrConf - Unable to read jdk_list.toml; error: %v\n", errToml)
 			os.Exit(util.ErrConf)
 		} else if errDL != nil {
-			fmt.Fprintf(os.Stderr, "(e:3)ErrDL - Error downloading archive; error: %v", errDL)
+			fmt.Fprintf(os.Stderr, "\n(e:3)ErrDL - Error downloading archive; error: %v\n", errDL)
 			os.Exit(util.ErrDL)
 		} else if errExtr != nil {
-			fmt.Fprintf(os.Stderr, "(e:2)ErrConf - Error extracting archive; error: %v", errExtr)
+			fmt.Fprintf(os.Stderr, "\n(e:2)ErrConf - Error extracting archive; error: %v\n", errExtr)
 			os.Exit(util.ErrExtr)
 		}
 	},

@@ -28,6 +28,9 @@ const (
 	// OpenJDK flag for setting/using OpenJDK as JDK of choice
 	OpenJDK int = iota
 
+	// OpenJ9 flag for setting/using OpenJdk with OpenJ9 JVM as JDK of choice
+	OpenJ9 int = iota
+
 	// Oracle flag for setting/using Oracle as JDK of choice
 	Oracle int = iota
 )

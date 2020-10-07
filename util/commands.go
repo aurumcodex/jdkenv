@@ -171,7 +171,12 @@ func SetOpenJDK(dest string, version int, openj9, spin, color bool, aur aurora.A
 			)
 		}
 		// need to add in checks to see if the extracted directory exists first
-		eDL := Download(OpenJDK, version, url, dest, spin, aur)
+		var eDL error
+		if openj9 {
+			eDL = Download(OpenJ9, version, url, dest, spin, aur)
+		} else {
+			eDL = Download(OpenJDK, version, url, dest, spin, aur)
+		}
 		if eDL != nil {
 			return nil, eDL, nil
 		}

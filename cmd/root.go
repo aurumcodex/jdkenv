@@ -29,19 +29,23 @@ import (
 	"gopkg.in/ini.v1"
 )
 
-var jdkVer int
-var noColor bool
-var spinner bool
-var cfg *ini.File
-var cfgErr error
-var au aurora.Aurora
+var (
+	jdkVer  int
+	noColor bool
+	spinner bool
+	au      aurora.Aurora
+
+	cfg    *ini.File
+	cfgErr error
+)
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Version: "0.1.0",
 	Use:     "jdkenv",
 	Short:   "A simple Go program to manage and install (if not found) various JDKs.",
-	Long: `jdkenv :: version 0.1.0
+	Long: `
+jdkenv :: version 0.1.0
 A simple Go program to manage and install (if not found) various JDKs.
 Running this program without a subcommand will only print the set JDK and Java version.
 
@@ -59,7 +63,7 @@ Running this program without a subcommand will only print the set JDK and Java v
 
 		cfg, cfgErr = ini.LoadSources(ini.LoadOptions{
 			SkipUnrecognizableLines: true,
-		}, "config.ini")
+		}, "../config.ini")
 		if cfgErr != nil {
 			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", cfgErr)
 			os.Exit(util.ErrConf)
@@ -98,8 +102,8 @@ func init() {
 
 	rootCmd.PersistentFlags().BoolVar(
 		&spinner,
-		"no-spinner",
-		false,
+		"spinner",
+		true,
 		"disables the activity spinner (useful for CI or testing)",
 	)
 
