@@ -55,7 +55,13 @@ Java versions supported:
 		}
 
 		// dest := cfg.Section("paths").Key("target").String()
-		dest := util.BuildString(cfg.Section("paths").Key("target").String(), "amazon_corretto.tar.gz")
+		var dest string
+		switch jdkVer {
+		case 8:
+			dest = util.BuildString(cfg.Section("paths").Key("target").String(), "amazon_corretto_8.tar.gz")
+		case 11: 
+			dest = util.BuildString(cfg.Section("paths").Key("target").String(), "amazon_corretto_11.tar.gz")
+		}
 
 		errToml, errDL, errExtr := util.SetCorretto(dest, jdkVer, spinner, noColor, au)
 		if errToml != nil {

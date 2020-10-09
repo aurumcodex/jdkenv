@@ -46,7 +46,9 @@ func SetCorretto(dest string, version int, spin, color bool, aur aurora.Aurora) 
 			return nil, eDL, nil
 		}
 		// need to add in checks to see if the extracted directory exists first
-		eExtr := Extract(jdks.Get("corretto.8.filename").(string), dest, spin, color, aur)
+		// eExtr := Extract(jdks.Get("corretto.8.filename").(string), dest, spin, color, aur)
+		// eExtr := Extract(".jdkenv/amazon_corretto_8.tar.gz", dest, spin, color, aur)
+		eExtr := Extract(dest, ".jdkenv/", spin, color, aur)
 		if eExtr != nil {
 			return nil, nil, eExtr
 		}
@@ -62,7 +64,8 @@ func SetCorretto(dest string, version int, spin, color bool, aur aurora.Aurora) 
 			return nil, eDL, nil
 		}
 		// need to add in checks to see if the extracted directory exists first
-		eExtr := Extract(jdks.Get("corretto.11.file_url").(string), dest, spin, color, aur)
+		// eExtr := Extract(jdks.Get("corretto.11.file_url").(string), dest, spin, color, aur)
+		eExtr := Extract(".jdkenv/amazon_corretto_11.tar.gz", dest, spin, color, aur)
 		if eExtr != nil {
 			return nil, nil, eExtr
 		}

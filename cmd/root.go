@@ -46,8 +46,10 @@ var rootCmd = &cobra.Command{
 	Short:   "A simple Go program to manage and install (if not found) various JDKs.",
 	Long: `
 jdkenv :: version 0.1.0
+
 A simple Go program to manage and install (if not found) various JDKs.
-Running this program without a subcommand will only print the set JDK and Java version.
+Running this program without a subcommand will only print the set JDK
+and Java version given.
 
 (default JDK and Java version is AdoptOpenJDK 8)`,
 	Run: func(cmd *cobra.Command, args []string) {

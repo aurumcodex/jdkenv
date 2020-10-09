@@ -96,3 +96,8 @@ func CheckValidJDK(jdk, version int) bool {
 		return false
 	}
 }
+
+// WriteEnvFile writes to the `.env` file found within the `~/.jdkenv` directory.
+func WriteEnvFile(jdk, version int) {
+	
+}
