@@ -31,7 +31,7 @@ import (
 var correttoCmd = &cobra.Command{
 	Use:   "corretto",
 	Short: "Set usage of Amazon Corretto JDK",
-	Long: `Downloads and extracts (if not already existing) the tarball containing
+	Long: `Downloads and extracts (if not already existing) the archive containing
 the Amazon Corretto JDK with set JDK version parameter.
 
 Java versions supported:
@@ -59,9 +59,10 @@ Java versions supported:
 		switch jdkVer {
 		case 8:
 			dest = util.BuildString(cfg.Section("paths").Key("target").String(), "amazon_corretto_8.tar.gz")
-		case 11: 
+		case 11:
 			dest = util.BuildString(cfg.Section("paths").Key("target").String(), "amazon_corretto_11.tar.gz")
 		}
+		fmt.Println("Dest = ", dest)
 
 		errToml, errDL, errExtr := util.SetCorretto(dest, jdkVer, spinner, noColor, au)
 		if errToml != nil {

@@ -70,7 +70,7 @@ func CheckValidJDK(jdk, version int) bool {
 
 	case OpenJDK:
 		switch version {
-		case 8, 11, 14, 15:
+		case 8, 11, 15:
 			return true
 		default:
 			return false
@@ -78,7 +78,7 @@ func CheckValidJDK(jdk, version int) bool {
 
 	case OpenJ9:
 		switch version {
-		case 8, 11, 14:
+		case 8, 11, 15:
 			return true
 		default:
 			return false
@@ -99,5 +99,5 @@ func CheckValidJDK(jdk, version int) bool {
 
 // WriteEnvFile writes to the `.env` file found within the `~/.jdkenv` directory.
 func WriteEnvFile(jdk, version int) {
-	
+
 }

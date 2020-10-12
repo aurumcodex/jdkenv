@@ -1,0 +1,24 @@
+[openjdk]
+vendor    = "Oracle"
+product   = "OpenJDK"
+jdk_major = 11
+version   = "11+28"
+
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
+[openjdk.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip"
+filename  = "openjdk-11+28_windows-x64_bin.zip"
+sha256    = "fde3b28ca31b86a889c37528f17411cd0b9651beb6fa76cac89a223417910f4b"
+java_home_prefix = ""
+
+# macOS not supported for Oracle OpenJDK implementations
+
+[openjdk.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz"
+filename  = "openjdk-11+28_linux-x64_bin.tar.gz"
+sha256    = "3784cfc4670f0d4c5482604c7c513beb1a92b005f569df9bf100e8bef6610f2e"
+java_home_prefix = ""

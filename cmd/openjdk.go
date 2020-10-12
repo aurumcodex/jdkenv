@@ -33,14 +33,13 @@ var useOpenJ9 bool
 var openjdkCmd = &cobra.Command{
 	Use:   "openjdk",
 	Short: "Set usage of AdoptOpenJDK",
-	Long: `Downloads and extracts (if not already existing) the tarball containing
+	Long: `Downloads and extracts (if not already existing) the archive containing
 the AdoptOpenJDK implementation with the set JDK version parameter. 
 (OpenJ9 VM only available for Java versions 8, 11, and 14)
 
 Java versions supported:
   - 8   (default)
   - 11
-  - 14
   - 15`,
 	Run: func(cmd *cobra.Command, args []string) {
 		util.CheckRuntime()

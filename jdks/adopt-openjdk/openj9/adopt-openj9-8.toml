@@ -1,0 +1,30 @@
+[adopt-openj9]
+vendor    = "AdoptOpenJDK"
+flavor    = "OpenJ9"
+jdk_major = 8
+version   = "8u265-b01"
+openj9_version = "0.21.0"
+
+[adopt-openjdk.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u265-b01_openj9-0.21.0/OpenJDK8U-jdk_x64_windows_openj9_8u265b01_openj9-0.21.0.zip"
+filename  = "OpenJDK8U-jdk_x64_windows_openj9_8u265b01_openj9-0.21.0.zip"
+sha256    = "b7def2e7261cdadbe309cd60f4c72bba5b8e865982bb8196087660b52f7be2f8"
+java_home_prefix = ""
+
+[adopt-openjdk.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u265-b01_openj9-0.21.0/OpenJDK8U-jdk_x64_mac_openj9_8u265b01_openj9-0.21.0.tar.gz"
+filename  = "OpenJDK8U-jdk_x64_mac_openj9_8u265b01_openj9-0.21.0.tar.gz"
+sha256    = "963683189fe2ab6d35f00d6ad9562fc7e9790e7e82fe3d1b01e6c80bde910c63"
+java_home_prefix = "Contents/Home"
+
+[adopt-openjdk.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u265-b01_openj9-0.21.0/OpenJDK8U-jdk_x64_linux_openj9_8u265b01_openj9-0.21.0.tar.gz"
+filename  = "OpenJDK8U-jdk_x64_linux_openj9_8u265b01_openj9-0.21.0.tar.gz"
+sha256    = "88ff739005cbb012f3ee73d426bd75810ce7de551d08e555475a261d57e3ecbf"
+java_home_prefix = ""

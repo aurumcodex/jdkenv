@@ -1,0 +1,29 @@
+[adopt-openjdk]
+vendor    = "AdoptOpenJDK"
+flavor    = "Hotspot"
+jdk_major = 11
+version   = "11.0.8+10"
+
+[adopt-openjdk.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10/OpenJDK11U-jdk_x64_windows_hotspot_11.0.8_10.zip"
+filename  = "OpenJDK11U-jdk_x64_windows_hotspot_11.0.8_10.zip"
+sha256    = "473e552748b23bd95ad097249e97f5d923d8dde3b956a9487ab17c860a6baa48"
+java_home_prefix = ""
+
+[adopt-openjdk.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10/OpenJDK11U-jdk_x64_mac_hotspot_11.0.8_10.tar.gz"
+filename  = "OpenJDK11U-jdk_x64_mac_hotspot_11.0.8_10.tar.gz"
+sha256    = "4a8dadd58cdc32c7e59978971d56aec610be7ee0ddf0dc1d137bb8b78456499f"
+java_home_prefix = "Contents/Home"
+
+[adopt-openjdk.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz"
+filename  = "OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz"
+sha256    = "6e4cead158037cb7747ca47416474d4f408c9126be5b96f9befd532e0a762b47"
+java_home_prefix = ""

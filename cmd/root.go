@@ -20,6 +20,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"runtime"
 	"strings"
 
 	"github.com/aurumcodex/jdkenv/util"
@@ -65,7 +66,7 @@ and Java version given.
 
 		cfg, cfgErr = ini.LoadSources(ini.LoadOptions{
 			SkipUnrecognizableLines: true,
-		}, "../config.ini")
+		}, "config.ini")
 		if cfgErr != nil {
 			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", cfgErr)
 			os.Exit(util.ErrConf)
@@ -76,6 +77,9 @@ and Java version given.
 		jdkRI := cfg.Section("").Key("JDK_RI").String()
 		jdk := strings.SplitN(jdkRI, ".", -1)
 		openj9, _ := cfg.Section("").Key("OPENJ9").Bool()
+
+		fmt.Println("Arch ::", runtime.GOARCH)
+		fmt.Println("OS   ::", runtime.GOOS)
 
 		fmt.Println("Java environment:")
 		fmt.Printf("Implementation :: %v\n", jdk[0])

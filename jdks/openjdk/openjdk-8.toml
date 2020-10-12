@@ -1,0 +1,24 @@
+[openjdk]
+vendor    = "Oracle"
+product   = "OpenJDK"
+jdk_major = 8
+version   = "1.8.0_41-b04"
+
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
+[openjdk.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip"
+filename  = "openjdk-8u41-b04-windows-i586-14_jan_2020.zip"
+sha256    = "22fada5528c116f2f1a5dba9001e72c1ef2859832cec9259fdfa3a9ce719496a "
+java_home_prefix = ""
+
+# macOS not supported for Oracle OpenJDK implementations
+
+[openjdk.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz"
+filename  = "openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz"
+sha256    = "98c13207b5d208613c987c91c353a199fbf28ca07481c1f077803e4e436ea58a"
+java_home_prefix = ""

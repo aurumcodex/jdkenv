@@ -1,0 +1,30 @@
+[adopt-openj9]
+vendor    = "AdoptOpenJDK"
+flavor    = "OpenJ9"
+jdk_major = 15
+version   = "15+36"
+openj9_version = "0.22.0"
+
+[adopt-openjdk.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36_openj9-0.22.0/OpenJDK15U-jdk_x64_windows_openj9_15_36_openj9-0.22.0.zip"
+filename  = "OpenJDK15U-jdk_x64_windows_openj9_15_36_openj9-0.22.0.zip"
+sha256    = "fad3b4f31e70fa929c866778a2f796212ac5a31180fe4679d5dbf08ccca68493"
+java_home_prefix = ""
+
+[adopt-openjdk.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36_openj9-0.22.0/OpenJDK15U-jdk_x64_mac_openj9_15_36_openj9-0.22.0.tar.gz"
+filename  = "OpenJDK15U-jdk_x64_mac_openj9_15_36_openj9-0.22.0.tar.gz"
+sha256    = "d861a0fc91019a0821f83ef8afa5d86443697bfeff76652950fa264d68a3299d"
+java_home_prefix = "Contents/Home"
+
+[adopt-openjdk.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36_openj9-0.22.0/OpenJDK15U-jdk_x64_linux_openj9_15_36_openj9-0.22.0.tar.gz"
+filename  = "OpenJDK15U-jdk_x64_linux_openj9_15_36_openj9-0.22.0.tar.gz"
+sha256    = "3f016e23a1fba0b1d29f03415c36d54a8a33480ce1d238fbef09d38c5a69eff7"
+java_home_prefix = ""

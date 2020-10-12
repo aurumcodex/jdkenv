@@ -31,11 +31,11 @@ import (
 var oracleCmd = &cobra.Command{
 	Use:   "oracle",
 	Short: "Set usage of Oracle OpenJDK Reference Implementation",
-	Long: `Downloads and extracts (if not already existing) the tarball containing
+	Long: `Downloads and extracts (if not already existing) the archive containing
 the Oracle OpenJDK implementation with the set JDK version parameter.
 
 Java versions supported:
-  - 8    (default)
+  - 8   (default)
   - 11
   - 15`,
 	Run: func(cmd *cobra.Command, args []string) {

@@ -1,0 +1,30 @@
+[adopt-openj9]
+vendor    = "AdoptOpenJDK"
+flavor    = "OpenJ9"
+jdk_major = 11
+version   = "11.0.8+10"
+openj9_version = "0.21.0"
+
+[adopt-openjdk.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10_openj9-0.21.0/OpenJDK11U-jdk_x64_windows_openj9_11.0.8_10_openj9-0.21.0.zip"
+filename  = "OpenJDK11U-jdk_x64_windows_openj9_11.0.8_10_openj9-0.21.0.zip"
+sha256    = "f89176b1dd554952d9790f65b46220eee63b6a58cdd84c7db5d922292074c674"
+java_home_prefix = ""
+
+[adopt-openjdk.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10_openj9-0.21.0/OpenJDK11U-jdk_x64_mac_openj9_11.0.8_10_openj9-0.21.0.tar.gz"
+filename  = "OpenJDK11U-jdk_x64_mac_openj9_11.0.8_10_openj9-0.21.0.tar.gz"
+sha256    = "71df9865d068a2dd1a963636b7e30f4e9188bac73b3935822b76b354f9e30216"
+java_home_prefix = "Contents/Home"
+
+[adopt-openjdk.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10_openj9-0.21.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.8_10_openj9-0.21.0.tar.gz"
+filename  = "OpenJDK11U-jdk_x64_linux_openj9_11.0.8_10_openj9-0.21.0.tar.gz"
+sha256    = "9ab79436180d41809f4fca8afe43e778ae2d82c7b50f3653c62d7a2728150836"
+java_home_prefix = ""

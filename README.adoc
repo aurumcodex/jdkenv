@@ -9,8 +9,10 @@ Creates a directory `.jdkenv` in the `$HOME` directory, and will contain the dow
 fully extracted. Once a JDK has been selected, an `env` file will be created within the `.jdkenv` directory
 that can then be sourced via a shell recfile. (`.bashrc`, `.zshrc`, `.profile`, etc.)
 
+Takes quite a lot of inspiration from how JetBrains' IntelliJ IDEA IDE can download and use various JDKs.
+(Even the `.toml` files take quite a lot of inspiration from IntelliJ's `*.intellij` files for its known JDKs.)
 
-NOTE: Windows is currently unsupported at this time.
+NOTE: Environment variable setting not yet implemented.
 
 == Dependencies
 - Go 1.15 (min version needs to be checked from deps)
@@ -59,10 +61,18 @@ Flags:
 ** JDK 15
 
 - AdoptOpenJDK
-** JDK 8  (Hotspot VM / OpenJ9 VM)
-** JDK 11 (Hotspot VM / OpenJ9 VM)
-** JDK 14 (Hotspot VM / OpenJ9 VM)
-** JDK 15 (Hotspot VM Only)
+** JDK 8  `(Hotspot JVM / OpenJ9 JVM)`
+** JDK 11 `(Hotspot JVM / OpenJ9 JVM)`
+** JDK 15 `(Hotspot JVM / OpenJ9 JVM)`
+
+// - SAP Sapmachine
+// ** JDK 11
+// ** JDK 15
+
+// - Azul Zulu Community™
+// ** JDK 8
+// ** JDK 11
+// ** JDK 15
 
 == License
 JDKEnv is licensed under the Apache 2.0 License.

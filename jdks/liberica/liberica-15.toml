@@ -1,0 +1,30 @@
+[liberica]
+vendor    = "BellSoft"
+product   = "Liberica"
+jdk_major = 15
+version   = "15+36"
+
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
+[liberica.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/15+36/bellsoft-jdk15+36-windows-amd64-full.zip"
+filename  = "bellsoft-jdk15+36-windows-amd64-full.zip"
+sha256    = "a5d4d45f1cee8bcf49b157ed196e5a64c1313794d33883ba5d8e3604c75c0eb4"
+java_home_prefix = ""
+
+[liberica.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/15+36/bellsoft-jdk15+36-macos-amd64-full.zip"
+filename  = "bellsoft-jdk15+36-macos-amd64-full.zip"
+sha256    = "bb624aca64d94b8c2d0af9321b35244d27717ab4036bdd12f9819b01c08609fc"
+java_home_prefix = "Contents/Home"
+
+[liberica.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/15+36/bellsoft-jdk15+36-linux-amd64-full.tar.gz"
+filename  = "bellsoft-jdk15+36-linux-amd64-full.tar.gz"
+sha256    = "5498bcd2bd51b01221f3cb9dbe728768743f854573014fb3479413155dc3bd3e"
+java_home_prefix = ""

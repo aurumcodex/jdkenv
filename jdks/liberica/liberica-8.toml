@@ -1,0 +1,30 @@
+[liberica]
+vendor    = "BellSoft"
+product   = "Liberica"
+jdk_major = 8
+version   = "1.8.0_265"
+
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
+[liberica.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/8u265+1/bellsoft-jdk8u265+1-windows-amd64-full.zip"
+filename  = "bellsoft-jdk8u265+1-windows-amd64-full.zip"
+sha256    = "5147d4ed94b2d3e394d8d62819e29aaa61f5ce3910113b28472f6ad72530eb0c"
+java_home_prefix = ""
+
+[liberica.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/8u265+1/bellsoft-jdk8u265+1-macos-amd64-full.zip"
+filename  = "bellsoft-jdk8u265+1-macos-amd64-full.zip"
+sha256    = "4b1a6dfdc99379f795b5363705fc72980d388477b2797422158b400c8226e1bd"
+java_home_prefix = "Contents/Home"
+
+[liberica.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/8u265+1/bellsoft-jdk8u265+1-linux-amd64-full.tar.gz"
+filename  = "bellsoft-jdk8u265+1-linux-amd64-full.tar.gz"
+sha256    = "b302a400e343400153bf74f6424ff7dea11c060f48496df2f5cfe04e291b3f61"
+java_home_prefix = ""

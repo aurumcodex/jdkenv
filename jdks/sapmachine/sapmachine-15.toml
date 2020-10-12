@@ -1,0 +1,30 @@
+[sapmachine]
+vendor    = "SAP"
+product   = "Sapmachine"
+jdk_major = 15
+version   = "15.27.17.0"
+
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
+[sapmachine.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://github.com/SAP/SapMachine/releases/download/sapmachine-15/sapmachine-jdk-15_windows-x64_bin.zip"
+filename  = "sapmachine-jdk-15_windows-x64_bin.zip"
+sha256    = "eef3ce54df37e89b1cdd78d48c5d426722a7eb252f86ca67808fe4fb9449c2d8"
+java_home_prefix = ""
+
+[sapmachine.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://github.com/SAP/SapMachine/releases/download/sapmachine-15/sapmachine-jdk-15_osx-x64_bin.tar.gz"
+filename  = "sapmachine-jdk-15_osx-x64_bin.tar.gz"
+sha256    = "5ddd6ee1af9308857589a1c82023061eccd03f042c4082ee00e3044a4200c233"
+java_home_prefix = "Contents/Home"
+
+[sapmachine.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://github.com/SAP/SapMachine/releases/download/sapmachine-15/sapmachine-jdk-15_linux-x64_bin.tar.gz"
+filename  = "sapmachine-jdk-15_linux-x64_bin.tar.gz"
+sha256    = "0f08290a7a1cd39ed03797b2578c79529ca64983f3c48d62f3a4a2c322eb6882"
+java_home_prefix = ""

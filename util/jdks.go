@@ -19,67 +19,50 @@ limitations under the License.
 package util
 
 const (
-	// Corretto flag for setting/using Corretto as JDK of choice
+	// Corretto flag for setting/using Corretto as JDK of choice.
 	Corretto int = iota
 
-	// Liberica flag for setting/using Liberica as JDK of choice
+	// Liberica flag for setting/using Liberica as JDK of choice.
 	Liberica int = iota
 
-	// OpenJDK flag for setting/using OpenJDK as JDK of choice
+	// OpenJDK flag for setting/using OpenJDK as JDK of choice.
 	OpenJDK int = iota
 
-	// OpenJ9 flag for setting/using OpenJdk with OpenJ9 JVM as JDK of choice
+	// OpenJ9 flag for setting/using OpenJdk with OpenJ9 JVM as JDK of choice.
 	OpenJ9 int = iota
 
-	// Oracle flag for setting/using Oracle as JDK of choice
+	// Oracle flag for setting/using Oracle as JDK of choice.
 	Oracle int = iota
+
+	// Azul flag for setting/using Azul Zulu as JDK of choice.
+	Azul int = iota
+
+	// Sapmachine flag for setting/using Sapmachine as JDK of choice.
+	Sapmachine int = iota
 )
 
 // Constants for determining what to put into the `.env` file in `~/.jdkenv`
 // and also the filenames to download to.
 const (
-	Corretto8Home string = `export JAVA_HOME="${HOME}/.jdkenv/amazon-corretto-8"`
-	Corretto8Path string = `export PATH=""`
+	JavaHomePath string = `export PATH="${JAVA_HOME}/bin:${PATH}`
 
+	Corretto8Home  string = `export JAVA_HOME="${HOME}/.jdkenv/amazon-corretto-8"`
 	Corretto11Home string = `export JAVA_HOME="${HOME}/.jdkenv/amazon-corretto-11"`
-	Corretto11Path string = `export PATH=""`
 
-	Liberica8Home string = `export JAVA_HOME="${HOME}/.jdkenv/bellsoft-liberica-8"`
-	Liberica8Path string = `export PATH=""`
-
+	Liberica8Home  string = `export JAVA_HOME="${HOME}/.jdkenv/bellsoft-liberica-8"`
 	Liberica11Home string = `export JAVA_HOME="${HOME}/.jdkenv/bellsoft-liberica-11"`
-	Liberica11Path string = `export PATH=""`
-
 	Liberica15Home string = `export JAVA_HOME="${HOME}/.jdkenv/bellsoft-liberica-15"`
-	Liberica15Path string = `export PATH=""`
 
-	Oracle8Home string = `export JAVA_HOME="${HOME}/.jdkenv/oracle-openjdk-8"`
-	Oracle8Path string = `export PATH=""`
-
+	Oracle8Home  string = `export JAVA_HOME="${HOME}/.jdkenv/oracle-openjdk-8"`
 	Oracle11Home string = `export JAVA_HOME="${HOME}/.jdkenv/oracle-openjdk-11"`
-	Oracle11Path string = `export PATH=""`
-
 	Oracle15Home string = `export JAVA_HOME="${HOME}/.jdkenv/oracle-openjdk-15"`
-	Oracle15Path string = `export PATH=""`
 
-	OpenJDK8Home string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-8"`
-	OpenJDK8Path string = `export PATH=""`
-
+	OpenJDK8Home  string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-8"`
 	OpenJDK11Home string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-11"`
-	OpenJDK11Path string = `export PATH=""`
-
 	OpenJDK14Home string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-14"`
-	OpenJDK14Path string = `export PATH=""`
-
 	OpenJDK15Home string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-15"`
-	OpenJDK15Path string = `export PATH=""`
 
-	OpenJ98Home string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-openj9-8"`
-	OpenJ98Path string = `export PATH=""`
-
+	OpenJ98Home  string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-openj9-8"`
 	OpenJ911Home string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-openj9-11"`
-	OpenJ911Path string = `export PATH=""`
-
 	OpenJ914Home string = `export JAVA_HOME="${HOME}/.jdkenv/adoptopenjdk-openj9-14"`
-	OpenJ914Path string = `export PATH=""`
 )

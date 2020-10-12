@@ -1,0 +1,30 @@
+[liberica]
+vendor    = "BellSoft"
+product   = "Liberica"
+jdk_major = 11
+version   = "11.0.8"
+
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
+[liberica.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/11.0.8+10/bellsoft-jdk11.0.8+10-windows-amd64-full.zip"
+filename  = "bellsoft-jdk11.0.8+10-windows-amd64-full.zip"
+sha256    = "39e648c6837c464e86fafbc9ee65a6c33ece7d3a826d383988a3f7a957d477b4"
+java_home_prefix = ""
+
+[liberica.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/11.0.8+10/bellsoft-jdk11.0.8+10-macos-amd64-full.zip"
+filename  = "bellsoft-jdk11.0.8+10-macos-amd64-full.zip"
+sha256    = "cdd6d6fd1b638b722279d299dd063e0576b8ff5d46e3931ceb66776b17df7353"
+java_home_prefix = "Contents/Home"
+
+[liberica.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://download.bell-sw.com/java/11.0.8+10/bellsoft-jdk11.0.8+10-linux-amd64-full.tar.gz"
+filename  = "bellsoft-jdk11.0.8+10-linux-amd64-full.tar.gz"
+sha256    = "163e106bdc23304d4104ce3adfadc98861656322fb5896dec93340129e564dca"
+java_home_prefix = ""

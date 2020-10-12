@@ -1,0 +1,30 @@
+[corretto]
+vendor    = "Amazon"
+product   = "Corretto"
+jdk_major = 8
+version   = "8.265.01.1"
+
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
+[corretto.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://corretto.aws/downloads/latest/amazon-corretto-8-x64-windows-jdk.zip"
+filename  = "amazon-corretto-8.265.01.1-windows-x64-jdk.zip"
+sha256    = "00945f148c3285e42489151279f7702bff54bbf67e26281feffe200f4a87d856"
+java_home_prefix = ""
+
+[corretto.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://corretto.aws/downloads/latest/amazon-corretto-8-x64-macos-jdk.tar.gz"
+filename  = "amazon-corretto-8.265.01.1-macosx-x64-jdk.tar.gz"
+sha256    = "2981777a545f14796649b2881fb5ce7ed8be2184abcd9d42e76973e0b8529a92"
+java_home_prefix = "Contents/Home"
+
+[corretto.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://corretto.aws/downloads/latest/amazon-corretto-8-x86-linux-jdk.tar.gz"
+filename  = "amazon-corretto-8.265.01.1-linux-x64.tar.gz"
+sha256    = "1db9c4bd89b9949c97bc5e690aedce2872bb716cf35c670a29cadeeb80d0cb18"
+java_home_prefix = ""

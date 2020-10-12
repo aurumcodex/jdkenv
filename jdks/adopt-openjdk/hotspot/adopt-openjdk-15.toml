@@ -1,0 +1,29 @@
+[adopt-openjdk]
+vendor    = "AdoptOpenJDK"
+flavor    = "Hotspot"
+jdk_major = 15
+version   = "15+36"
+
+[adopt-openjdk.windows]
+os        = "windows"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36/OpenJDK15U-jdk_x64_windows_hotspot_15_36.zip"
+filename  = "OpenJDK15U-jdk_x64_windows_hotspot_15_36.zip"
+sha256    = "0ec6b009c00e3786a30fd2327973ba8971817e482f658c732bea5cb9e268998f"
+java_home_prefix = ""
+
+[adopt-openjdk.macos]
+os        = "darwin"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36/OpenJDK15U-jdk_x64_mac_hotspot_15_36.tar.gz"
+filename  = "OpenJDK15U-jdk_x64_mac_hotspot_15_36.tar.gz"
+sha256    = "bd1fc774232e2dfee93056a01f5765bd92ffb19d68dd548c233a82bb5c162be4"
+java_home_prefix = "Contents/Home"
+
+[adopt-openjdk.linux]
+os        = "linux"
+arch      = "amd64"
+url       = "https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36/OpenJDK15U-jdk_x64_linux_hotspot_15_36.tar.gz"
+filename  = "OpenJDK15U-jdk_x64_linux_hotspot_15_36.tar.gz"
+sha256    = "c198593d1b5188ee3570e2ca33c3bc004aaefbda2c11e68e58ae7296cf5c3982"
+java_home_prefix = ""
