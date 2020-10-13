@@ -49,7 +49,7 @@ Java versions supported:
 
 		cfg, cfgErr = ini.LoadSources(ini.LoadOptions{
 			SkipUnrecognizableLines: true,
-		}, "config.ini")
+		}, "./config.ini")
 		if cfgErr != nil {
 			fmt.Fprintln(os.Stderr, "(e:2)ErrConf - Config file unable to be read; err =", cfgErr)
 			os.Exit(util.ErrConf)

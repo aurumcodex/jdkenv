@@ -5,6 +5,7 @@ jdk_major = 15
 version   = "15+36"
 openj9_version = "0.22.0"
 
+# matching `os` and `arch` keys to golang's runtime GOOS and GOARCH values
 [adopt-openjdk.windows]
 os        = "windows"
 arch      = "amd64"

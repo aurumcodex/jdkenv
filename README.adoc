@@ -12,7 +12,8 @@ that can then be sourced via a shell recfile. (`.bashrc`, `.zshrc`, `.profile`, 
 Takes quite a lot of inspiration from how JetBrains' IntelliJ IDEA IDE can download and use various JDKs.
 (Even the `.toml` files take quite a lot of inspiration from IntelliJ's `*.intellij` files for its known JDKs.)
 
-NOTE: Environment variable setting not yet implemented.
+NOTE: Environment variable setting not yet implemented. macOS testing needs to be done,
+as well as determining the best way of writing to Window's environment variables.
 
 == Dependencies
 - Go 1.15 (min version needs to be checked from deps)
@@ -23,12 +24,16 @@ NOTE: Environment variable setting not yet implemented.
 - Run `go get -u github.com/aurumcodex/jdkenv`
 
 == Usage
+Running this program without a subcommand will only print the set JDK
+and Java version given.
+
 ----
 Usage:
   jdkenv [flags]
   jdkenv [command]
 
 Available Commands:
+  azul        Set usage of Azul Zulu Community JDK
   corretto    Set usage of Amazon Corretto JDK
   errors      Print error codes and their meanings
   help        Help about any command
@@ -36,34 +41,35 @@ Available Commands:
   local       Set usage of a locally installed JDK
   openjdk     Set usage of AdoptOpenJDK
   oracle      Set usage of Oracle OpenJDK Reference Implementation
+  sapmachine  A brief description of your command
   system      Set usage of system installed JDK
 
 Flags:
   -h, --help       help for jdkenv
-  -j, --java int   use specific Java version (valid: 8, 11, 14, 15) (default 8)
+  -j, --java int   use specific Java version (valid: 8, 11, 15) (default 8)
       --no-color   use monochrome output
-      --spinner    disables the activity spinner (useful for CI or testing) (default true)
+      --spinner    disables the activity spinner (default true)
 ----
 
 == Supported JDKs
-- Oracle OpenJDK
-** JDK 8
-** JDK 11
-** JDK 15
+// - Oracle OpenJDK `(Windows and Linux only)`
+// ** JDK 8
+// ** JDK 11
+// ** JDK 15
 
-- Amazon Corretto
-** JDK 8
-** JDK 11
+// - Amazon Corretto
+// ** JDK 8
+// ** JDK 11
 
-- BellSoft Liberica
-** JDK 8
-** JDK 11
-** JDK 15
+// - BellSoft Liberica
+// ** JDK 8
+// ** JDK 11
+// ** JDK 15
 
-- AdoptOpenJDK
-** JDK 8  `(Hotspot JVM / OpenJ9 JVM)`
-** JDK 11 `(Hotspot JVM / OpenJ9 JVM)`
-** JDK 15 `(Hotspot JVM / OpenJ9 JVM)`
+// - AdoptOpenJDK
+// ** JDK 8  `(Hotspot JVM / OpenJ9 JVM)`
+// ** JDK 11 `(Hotspot JVM / OpenJ9 JVM)`
+// ** JDK 15 `(Hotspot JVM / OpenJ9 JVM)`
 
 // - SAP Sapmachine
 // ** JDK 11
@@ -73,7 +79,26 @@ Flags:
 // ** JDK 8
 // ** JDK 11
 // ** JDK 15
+[options="header",cols="h,4*"]
+|===
+| JDK Implementation  | Java 8 | Java 11 | Java 15 | Notes
+| Oracle OpenJDK      | ✓      | ✓       | ✓       | `Windows and Linux Only`
+| Amazon Corretto     | ✓      | ✓       |         | `none`
+| BellSoft Liberica   | ✓      | ✓       | ✓       | `none`
+| AdoptOpenJDK        | ✓      | ✓       | ✓       | `Hotspot and OpenJ9 JVMs supported`
+| SAP Sapmachine      |        | ✓       | ✓       | `none`
+| Azul Zulu Community | ✓      | ✓       | ✓       | `none`
+|===
 
 == License
 JDKEnv is licensed under the Apache 2.0 License.
 See link:LICENSE[LICENSE] for more details.
+
+.Third Party libraries used (and their licenses)
+- briandowns/spinner (Apache-2.0)
+- cavaliercoder/grab (BSD-3)
+- logrusorgru/aurora (Unlicense)
+- mholt/archiver     (MIT)
+- pelletier/go-toml  (MIT)
+- spf13/cobra        (Apache-2.0)
+- go-ini/ini         (Apache-2.0)

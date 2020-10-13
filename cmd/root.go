@@ -84,7 +84,7 @@ and Java version given.
 		fmt.Println("Java environment:")
 		fmt.Printf("Implementation :: %v\n", jdk[0])
 		fmt.Printf("  Java Version :: %v\n", jdkVer)
-		fmt.Printf(" Using OpenJ9? :: %v\n", openj9)
+		fmt.Printf("  Using OpenJ9 :: %v\n", openj9)
 	},
 }
 
@@ -110,7 +110,7 @@ func init() {
 		&spinner,
 		"spinner",
 		true,
-		"disables the activity spinner (useful for CI or testing)",
+		"disables the activity spinner",
 	)
 
 	rootCmd.PersistentFlags().IntVarP(
@@ -118,6 +118,6 @@ func init() {
 		"java",
 		"j",
 		8,
-		"use specific Java version (valid: 8, 11, 14, 15)",
+		"use specific Java version (valid: 8, 11, 15)",
 	)
 }

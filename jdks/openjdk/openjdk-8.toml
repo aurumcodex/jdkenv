@@ -13,7 +13,7 @@ filename  = "openjdk-8u41-b04-windows-i586-14_jan_2020.zip"
 sha256    = "22fada5528c116f2f1a5dba9001e72c1ef2859832cec9259fdfa3a9ce719496a "
 java_home_prefix = ""
 
-# macOS not supported for Oracle OpenJDK implementations
+# macOS not supported for Oracle OpenJDK implementations (Oracle or RedHat Builds)
 
 [openjdk.linux]
 os        = "linux"

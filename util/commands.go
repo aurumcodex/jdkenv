@@ -286,7 +286,7 @@ func SetOpenJDK(dest string, version int, openj9, spin, color bool, aur aurora.A
 
 // SetOracle sets the Java environment to use a reference implementation of OpenJDK built by Oracle.
 func SetOracle(dest string, version int, spin, color bool, aur aurora.Aurora) (error, error, error) {
-	jdks, eToml := toml.LoadFile("jdk_list.toml")
+	jdks, eToml := toml.LoadFile("jdk_list_old.toml")
 	if eToml != nil {
 		return eToml, nil, nil
 	}
